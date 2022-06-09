@@ -3,5 +3,5 @@
 
 npm i
 npx tsc --noEmit
-npm lint-staged
+npx lint-staged
 npm run test:unit

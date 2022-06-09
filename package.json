@@ -4,7 +4,8 @@
   "description": "Reference architecture to demonstrate AppSync to HTTP via VTL and IAM (acronym alert!)",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && npx jest unit.test",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "npx jest unit.test",
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
     "prepare": "husky install"
