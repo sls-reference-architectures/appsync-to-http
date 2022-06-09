@@ -1,4 +1,3 @@
-import { APIGatewayProxyEventV2 } from 'aws-lambda';
 import * as service from '../src/service';
 
 describe('When invoking service getProduct()', () => {
@@ -6,7 +5,6 @@ describe('When invoking service getProduct()', () => {
     // ARRANGE
     const productId = 'x';
     const storeId = 'y';
-
 
     // ACT
     const result = await service.getProduct({ productId, storeId });
