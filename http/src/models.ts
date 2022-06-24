@@ -1,14 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 
-export interface Product extends Identity {
+export interface Product {
   name: string;
   price: number;
+  productId: string;
   storeId: string;
-}
-
-export interface Identity {
-  id: string;
 }
 
 export interface APIGatewayProxyEventMiddyNormalized<T>

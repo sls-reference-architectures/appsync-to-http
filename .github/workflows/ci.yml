@@ -26,6 +26,8 @@
             run: npm ci
           - name: Run unit tests
             run: npm test
+          - name: Run int tests
+            run: npm test:int
           - name: Deploy
             run: npm run deploy
           # - name: Run E2E Tests

@@ -14,14 +14,9 @@ module.exports = {
   root: true,
   rules: {
     'no-use-before-define': 0,
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        ts: 'never',
-      },
-    ],
+    'import/extensions': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.ts'] }],
+    '@typescript-eslint/no-var-requires': 0,
   },
   settings: {
     'import/resolver': {

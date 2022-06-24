@@ -11,7 +11,7 @@ describe('When invoking service getProduct()', () => {
   it('should return Product', async () => {
     // ARRANGE
     const testProduct: Product = {
-      id: ulid(),
+      productId: ulid(),
       name: `nifty-product-${ulid()}`,
       price: 42,
       storeId: ulid(),
@@ -22,7 +22,7 @@ describe('When invoking service getProduct()', () => {
       async () => {
         // ACT
         const result = await service.getProduct({
-          productId: testProduct.id,
+          productId: testProduct.productId,
           storeId: testProduct.storeId,
         });
 
