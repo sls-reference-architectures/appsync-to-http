@@ -28,7 +28,7 @@ plugins:
 
 functions:
   getProduct:
-    handler: http/src/handlers.getProduct
+    handler: http/src/handlers.getProductHandler
     environment:
       TABLE_NAME: ${self:custom.tableName}
     events:
