@@ -8,6 +8,7 @@
     "test:unit": "npx jest unit.test",
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
+    "deploy": "npx sls deploy",
     "prepare": "husky install"
   },
   "repository": {

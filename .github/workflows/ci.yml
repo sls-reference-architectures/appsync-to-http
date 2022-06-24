@@ -26,10 +26,8 @@
             run: npm ci
           - name: Run unit tests
             run: npm test
-          # - name: Deploy SUT
-          #   run: npm run deploy:sut
-          # - name: Deploy Test Stack
-          #   run: npm run deploy:test.stack
+          - name: Deploy
+            run: npm run deploy
           # - name: Run E2E Tests
           #   run: npm run test:e2e
           #   env:
