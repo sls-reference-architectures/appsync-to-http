@@ -1,5 +1,7 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
+  DeleteCommand,
+  DeleteCommandInput,
   DynamoDBDocumentClient,
   GetCommand,
   GetCommandInput,
@@ -38,5 +40,16 @@ export default class ProductsRepository {
       Item: product,
     };
     await this.docClient.send(new PutCommand(params));
+  }
+
+  async deleteProduct(product: Product): Promise<void> {
+    const params: DeleteCommandInput = {
+      TableName: process.env.TABLE_NAME,
+      Key: {
+        storeId: product.storeId,
+        productId: product.productId,
+      },
+    };
+    await this.docClient.send(new DeleteCommand(params));
   }
 }

@@ -1,22 +1,18 @@
-import { ulid } from 'ulid';
 import retry from 'async-retry';
 
-import { Product } from '../src/models';
-import ProductsRepository from '../src/repository';
 import * as service from '../src/service';
+import { TestHelpers } from './testHelpers';
 
-const repo = new ProductsRepository();
+const testHelpers = new TestHelpers();
 
 describe('When invoking service getProduct()', () => {
+  afterAll(async () => {
+    await testHelpers.teardown();
+  });
+
   it('should return Product', async () => {
     // ARRANGE
-    const testProduct: Product = {
-      productId: ulid(),
-      name: `nifty-product-${ulid()}`,
-      price: 42,
-      storeId: ulid(),
-    };
-    await repo.saveProduct(testProduct);
+    const testProduct = await testHelpers.createRandomProductInDb();
 
     await retry(
       async () => {
