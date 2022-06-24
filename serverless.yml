@@ -34,7 +34,7 @@ functions:
     events:
       - httpApi:
           method: GET
-          path: /stores/{storeId}/products/{productId}
+          path: /products/{productId}
           authorizer:
             type: aws_iam
     iamRoleStatements:

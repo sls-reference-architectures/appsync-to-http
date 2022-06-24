@@ -1,22 +1,26 @@
 import Logger from '@dazn/lambda-powertools-logger';
-// import { APIGatewayProxyEventV2, APIGatewayProxyResultV2, Handler } from 'aws-lambda';
+import middy from '@middy/core';
+import eventNormalizer from '@middy/http-event-normalizer';
+import errorHandler from '@middy/http-error-handler';
 
 import { APIGatewayProxyEventMiddyNormalized, Product } from './models';
 import * as service from './service';
 
-// type ProxyHandler = Handler<APIGatewayProxyEventV2, APIGatewayProxyResultV2>
-
-export const getProduct = async (
-  event: APIGatewayProxyEventMiddyNormalized<null>,
-): Promise<Product> => {
+const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Promise<Product> => {
   Logger.debug('In getProduct()', { event });
   const {
-    pathParameters: { storeId = '', productId = '' },
+    pathParameters: { productId },
+    headers: { 'x-custom-store-id': storeId },
   } = event;
-  const product = await service.getProduct({ storeId, productId });
+  const product = await service.getProduct({
+    storeId: storeId ?? '',
+    productId: productId ?? '',
+  });
 
   return product;
 };
+
+export const getProductHandler = middy(getProduct).use(eventNormalizer()).use(errorHandler());
 
 export const placeHolder = () => {
   Logger.debug('placeholder');
