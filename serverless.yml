@@ -1,0 +1,67 @@
+service: appsync-to-http
+
+provider:
+  name: aws
+  region: ${opt:region, 'us-east-1'},
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  deploymentBucket:
+    name: com.reference-architecture.deploys
+    maxPreviousDeploymentArtifacts: 5
+    serverSideEncryption: AES256
+  tags:
+    lumigo:auto-trace: true
+
+custom:
+  logRetentionInDays: 7
+  prune:
+    automatic: true
+    number: 1
+  tableName: ${self:service}-products
+
+plugins:
+  - serverless-esbuild
+  - serverless-iam-roles-per-function
+  - serverless-deployment-bucket
+  - serverless-plugin-log-retention
+  - serverless-prune-plugin
+
+functions:
+  getProduct:
+    handler: http/src/handlers.getProduct
+    environment:
+      TABLE_NAME: ${self:custom.tableName}
+    events:
+      - httpApi:
+          method: GET
+          path: /stores/{storeId}/products/{productId}
+          authorizer:
+            type: aws_iam
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:GetItem
+        Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
+
+resources:
+  Resources:
+    ProductTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        KeySchema:
+          - AttributeName: storeId
+            KeyType: HASH
+          - AttributeName: productId
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: storeId
+            AttributeType: S
+          - AttributeName: productId
+            AttributeType: S
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES

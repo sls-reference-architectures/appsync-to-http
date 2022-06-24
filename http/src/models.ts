@@ -4,6 +4,7 @@ import { APIGatewayProxyEventV2 } from 'aws-lambda';
 export interface Product extends Identity {
   name: string;
   price: number;
+  storeId: string;
 }
 
 export interface Identity {

@@ -1,15 +1,35 @@
+import { ulid } from 'ulid';
+import retry from 'async-retry';
+
+import { Product } from '../src/models';
+import ProductsRepository from '../src/repository';
 import * as service from '../src/service';
+
+const repo = new ProductsRepository();
 
 describe('When invoking service getProduct()', () => {
   it('should return Product', async () => {
     // ARRANGE
-    const productId = 'x';
-    const storeId = 'y';
+    const testProduct: Product = {
+      id: ulid(),
+      name: `nifty-product-${ulid()}`,
+      price: 42,
+      storeId: ulid(),
+    };
+    await repo.saveProduct(testProduct);
 
-    // ACT
-    const result = await service.getProduct({ productId, storeId });
+    await retry(
+      async () => {
+        // ACT
+        const result = await service.getProduct({
+          productId: testProduct.id,
+          storeId: testProduct.storeId,
+        });
 
-    // ASSERT
-    expect(result.id).toBeString();
+        // ASSERT
+        expect(result.name).toEqual(testProduct.name);
+      },
+      { retries: 3 },
+    );
   });
 });

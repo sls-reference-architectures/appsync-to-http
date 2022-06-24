@@ -1,23 +1,22 @@
 import Logger from '@dazn/lambda-powertools-logger';
 
 import { Product } from './models';
+import ProductsRepository from './repository';
+
+const repo = new ProductsRepository();
 
 export const getProduct = async (input: GetProductInput): Promise<Product> => {
   Logger.debug('In service.getProduct()', { input });
-  const defaultProduct: Product = {
-    id: 'xyz',
-    name: 'placeholder',
-    price: 0.42,
-  };
+  const product = await repo.getProduct(input);
 
-  return defaultProduct;
+  return product;
 };
 
 export const placeholder = () => {
   Logger.debug('placeholder export');
 };
 
-interface GetProductInput {
+export interface GetProductInput {
   productId: string;
   storeId: string;
 }
