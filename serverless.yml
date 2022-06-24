@@ -2,7 +2,7 @@ service: appsync-to-http
 
 provider:
   name: aws
-  region: ${opt:region, 'us-east-1'},
+  region: us-east-1
   runtime: nodejs14.x
   stage: ${opt:stage, 'dev'}
   deploymentBucket:
