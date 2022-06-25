@@ -45,6 +45,20 @@ functions:
       - Effect: Allow
         Action: dynamodb:GetItem
         Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
+  createProduct:
+    handler: http/src/handlers.createProductHandler
+    environment:
+      TABLE_NAME: ${self:custom.tableName}
+    events:
+      - httpApi:
+          method: POST
+          path: /products
+          authorizer:
+            type: aws_iam
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:PutItem
+        Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
 ## AppSync
   echo:
     handler: appSync/src/handlers.echo
