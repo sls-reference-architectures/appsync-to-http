@@ -38,10 +38,10 @@ describe('When creating a Product', () => {
     // ASSERT
     expect(status).toEqual(200);
     expect(data.errors).toBeUndefined();
-    // expect(data.data.createProduct).toBeString();
+    expect(data.data.createProduct.productId).toBeString();
   });
 
-  it.skip('should be queryable', async () => {
+  it('should be queryable', async () => {
     // ARRANGE
     const input = createRandomCreateProductInput();
     const requestOptions: AxiosRequestConfig = {
@@ -63,9 +63,10 @@ describe('When creating a Product', () => {
     expect(status).toEqual(200);
     expect(data.errors).toBeUndefined();
     const {
-      data: { createProduct: productId },
+      data: {
+        createProduct: { productId },
+      },
     } = data;
-    console.log(data.data);
     const getProductInput = { productId, storeId: input.storeId };
     await retry(
       async () => {
@@ -76,7 +77,7 @@ describe('When creating a Product', () => {
         );
         expect(getResult.status).toEqual(200);
         expect(getResult.data.errors).toBeUndefined();
-        expect(getResult.data.getProduct.name).toEqual(input.name);
+        expect(getResult.data.data.getProduct.name).toEqual(input.name);
       },
       { retries: 3 },
     );
