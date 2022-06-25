@@ -10,6 +10,12 @@ export const createRandomProduct = () => ({
   storeId: ulid(),
 });
 
+export const createRandomCreateProductInput = () => ({
+  name: `nifty-product-${ulid()}`,
+  price: 42,
+  storeId: ulid(),
+});
+
 export class TestHelpers {
   private repo: ProductsRepository;
 
@@ -49,6 +55,6 @@ export const GetProductQuery = /* GraphQL */ `
 
 export const CreateProductMutation = /* GraphQL */ `
   mutation createProduct($input: CreateProductInput!) {
-    createProduct(input: $input) {}
+    createProduct(input: $input)
   }
 `;

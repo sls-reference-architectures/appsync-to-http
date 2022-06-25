@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import retry from 'async-retry';
 
 import { GetProductQuery, TestHelpers } from '../../common/testHelpers';
 
@@ -23,15 +24,20 @@ describe('When querying for Product', () => {
     };
     const input = { productId: product.productId, storeId: product.storeId };
 
-    // ACT
-    const { data, status } = await axios.post(
-      BaseUri,
-      { query: GetProductQuery, variables: { input } },
-      requestOptions,
-    );
+    await retry(
+      async () => {
+        // ACT
+        const { data, status } = await axios.post(
+          BaseUri,
+          { query: GetProductQuery, variables: { input } },
+          requestOptions,
+        );
 
-    // ASSERT
-    expect(status).toEqual(200);
-    expect(data.errors).toBeUndefined();
+        // ASSERT
+        expect(status).toEqual(200);
+        expect(data.errors).toBeUndefined();
+      },
+      { retries: 3 },
+    );
   });
 });
