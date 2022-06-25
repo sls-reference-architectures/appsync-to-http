@@ -10,8 +10,8 @@
     "test:e2e": "npx jest e2e.test --config jest.config.int.js",
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
-    "deploy:http": "npx sls deploy --config http/serverless.yml",
-    "deploy:appSync": "npx sls deploy --config appSync/serverless.yml",
+    "deploy:http": "npx sls deploy --config serverless.http.yml",
+    "deploy:appSync": "npx sls deploy --config serverless.appSync.yml",
     "prepare": "husky install"
   },
   "repository": {
