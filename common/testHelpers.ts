@@ -40,6 +40,10 @@ export class TestHelpers {
   async teardown() {
     await Promise.all(this.createdProducts.map(async (p) => this.repo.deleteProduct(p)));
   }
+
+  trackProductForTeardown(product: Product) {
+    this.createdProducts.push(product);
+  }
 }
 
 export const GetProductQuery = /* GraphQL */ `

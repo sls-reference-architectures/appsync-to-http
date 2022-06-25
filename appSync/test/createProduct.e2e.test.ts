@@ -34,6 +34,7 @@ describe('When creating a Product', () => {
       { query: CreateProductMutation, variables: { input } },
       requestOptions,
     );
+    testHelpers.trackProductForTeardown({ ...input, productId: data.data.createProduct.productId });
 
     // ASSERT
     expect(status).toEqual(200);
@@ -58,6 +59,7 @@ describe('When creating a Product', () => {
       { query: CreateProductMutation, variables: { input } },
       requestOptions,
     );
+    testHelpers.trackProductForTeardown({ ...input, productId: data.data.createProduct.productId });
 
     // ASSERT
     expect(status).toEqual(200);
