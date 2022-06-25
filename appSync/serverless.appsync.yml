@@ -9,7 +9,7 @@ mappingTemplatesLocation: appSync/mappingTemplates
 mappingTemplates:
   - type: Query
     field: getProduct
-    dataSource: ProductsService
+    dataSource: ProductService
 dataSources:
   - name: ProductService
     type: HTTP
