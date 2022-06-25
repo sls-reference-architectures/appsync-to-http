@@ -9,9 +9,7 @@ mappingTemplatesLocation: appSync/mappingTemplates
 mappingTemplates:
   - type: Query
     field: getProduct
-    dataSource: EchoLambda # Swap to VTL --SRO
-    request: false
-    response: false
+    dataSource: ProductsService
 dataSources:
   - name: ProductService
     type: HTTP
