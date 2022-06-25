@@ -10,10 +10,14 @@ const setup = async (): Promise<void> => {
   process.env.TABLE_NAME = 'appsync-to-http-products';
   const stackName = 'appsync-to-http-dev';
   const stack = await getStack(stackName);
-  process.env.HTTP_API_URL = getApiUrl(stack);
+  process.env.HTTP_API_URL = getHttpApiUrl(stack);
+  process.env.GRAPH_API_URL = getGraphApiUrl(stack);
+  process.env.GRAPH_API_KEY = getGraphApiKey(stack);
 };
 
-const getApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
+const getHttpApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
+const getGraphApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'AppsynctohttpGraphQlApiUrl')?.OutputValue;
+const getGraphApiKey = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'AppsynctohttpGraphQlApiKeytest')?.OutputValue;
 
 const getStack = async (stackName: string): Promise<Stack> => {
   const cf = new CloudFormationClient({ region });

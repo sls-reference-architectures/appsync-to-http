@@ -35,3 +35,14 @@ export class TestHelpers {
     await Promise.all(this.createdProducts.map(async (p) => this.repo.deleteProduct(p)));
   }
 }
+
+export const GetProductQuery = /* GraphQL */ `
+  query getProduct($input: GetProductInput!) {
+    getProduct(input: $input) {
+      name
+      price
+      productId
+      storeId
+    }
+  }
+`;
