@@ -1,7 +1,7 @@
 import { ulid } from 'ulid';
 
-import { Product } from '../src/models';
-import ProductsRepository from '../src/repository';
+import { Product } from '../http/src/models';
+import ProductsRepository from '../http/src/repository';
 
 export const createRandomProduct = () => ({
   productId: ulid(),

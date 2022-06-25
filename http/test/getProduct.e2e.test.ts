@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import aws4Interceptor from 'aws4-axios';
 import retry from 'async-retry';
 
-import { TestHelpers } from './testHelpers';
+import { TestHelpers } from '../../common/testHelpers';
 import { Product } from '../src/models';
 
 const testHelpers = new TestHelpers();

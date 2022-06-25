@@ -1,7 +1,7 @@
 import retry from 'async-retry';
 
 import * as service from '../src/service';
-import { TestHelpers } from './testHelpers';
+import { TestHelpers } from '../../common/testHelpers';
 
 const testHelpers = new TestHelpers();
 
