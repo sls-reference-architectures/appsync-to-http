@@ -46,3 +46,9 @@ export const GetProductQuery = /* GraphQL */ `
     }
   }
 `;
+
+export const CreateProductMutation = /* GraphQL */ `
+  mutation createProduct($input: CreateProductInput!) {
+    createProduct(input: $input) {}
+  }
+`;

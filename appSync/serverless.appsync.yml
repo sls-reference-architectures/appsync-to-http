@@ -10,6 +10,9 @@ mappingTemplates:
   - type: Query
     field: getProduct
     dataSource: ProductService
+  - type: Mutation
+    field: createProduct
+    dataSource: ProductService
 dataSources:
   - name: ProductService
     type: HTTP
