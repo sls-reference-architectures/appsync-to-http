@@ -1,0 +1,20 @@
+name: appsync-to-http
+schema: appSync/schema.api.graphql
+authenticationType: API_KEY
+apiKeys:
+  - name: test
+    description: The test api key
+    expiresAfter: 300d
+mappingTemplatesLocation: appSync/mappingTemplates
+mappingTemplates:
+  - type: Query
+    field: getProduct
+    dataSource: EchoLambda # Swap to VTL --SRO
+    request: false
+    response: false
+dataSources:
+  - name: EchoLambda
+    type: AWS_LAMBDA
+    config:
+      functionName: echo
+      

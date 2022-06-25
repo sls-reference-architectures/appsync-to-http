@@ -13,6 +13,8 @@ provider:
     lumigo:auto-trace: true
 
 custom:
+  appSync:
+    - ${file(appSync/serverless.appsync.yml)}
   logRetentionInDays: 7
   prune:
     automatic: true
@@ -20,6 +22,7 @@ custom:
   tableName: ${self:service}-products
 
 plugins:
+  - serverless-appsync-plugin
   - serverless-esbuild
   - serverless-iam-roles-per-function
   - serverless-deployment-bucket
@@ -27,6 +30,7 @@ plugins:
   - serverless-prune-plugin
 
 functions:
+## HTTP
   getProduct:
     handler: http/src/handlers.getProductHandler
     environment:
@@ -41,6 +45,9 @@ functions:
       - Effect: Allow
         Action: dynamodb:GetItem
         Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
+## AppSync
+  echo:
+    handler: appSync/src/handlers.echo
 
 resources:
   Resources:
