@@ -1,7 +1,7 @@
 import Logger from '@dazn/lambda-powertools-logger';
 import { ulid } from 'ulid';
 
-import { Product } from './models';
+import { PageResult, Product } from './models';
 import ProductsRepository from './repository';
 
 const repo = new ProductsRepository();
@@ -20,9 +20,21 @@ export const createProduct = async (input: CreateProductInput) => {
   return id;
 };
 
+export const getProducts = async (input: GetProductsInput): Promise<PageResult<Product>> => {
+  Logger.debug('In service.getProducts()', { input });
+
+  return repo.getProducts(input);
+};
+
 export interface GetProductInput {
   productId: string;
   storeId: string;
 }
 
-export type CreateProductInput = Product
+export type CreateProductInput = Product;
+
+export interface GetProductsInput {
+  storeId: string;
+  limit?: number;
+  cursor?: string;
+}

@@ -13,3 +13,8 @@ export interface APIGatewayProxyEventMiddyNormalized<T>
   pathParameters: NonNullable<APIGatewayProxyEventV2['pathParameters']>;
   body: T;
 }
+
+export interface PageResult<T> {
+  items: T[];
+  cursor?: string;
+}

@@ -7,10 +7,12 @@ import {
   GetCommandInput,
   PutCommand,
   PutCommandInput,
+  QueryCommand,
+  QueryCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 
-import { Product } from './models';
-import { GetProductInput } from './service';
+import { PageResult, Product } from './models';
+import { GetProductInput, GetProductsInput } from './service';
 
 export default class ProductsRepository {
   private docClient: DynamoDBDocumentClient;
@@ -52,4 +54,41 @@ export default class ProductsRepository {
     };
     await this.docClient.send(new DeleteCommand(params));
   }
+
+  async getProducts(input: GetProductsInput): Promise<PageResult<Product>> {
+    const { storeId, limit, cursor } = input;
+    const params: QueryCommandInput = {
+      TableName: process.env.TABLE_NAME,
+      KeyConditionExpression: 'storeId = :storeId',
+      ExpressionAttributeValues: {
+        ':storeId': storeId,
+      },
+      Limit: limit,
+      ExclusiveStartKey: parseCursor(cursor),
+    };
+    const { Items: products, LastEvaluatedKey } = await this.docClient.send(
+      new QueryCommand(params),
+    );
+
+    return {
+      items: products as Product[],
+      cursor: createCursor(LastEvaluatedKey),
+    };
+  }
 }
+
+const createCursor = (lastEvaluatedKey: Record<string, any> | undefined): string | undefined => {
+  if (lastEvaluatedKey === undefined) {
+    return undefined;
+  }
+
+  return Buffer.from(JSON.stringify(lastEvaluatedKey)).toString('base64');
+};
+
+const parseCursor = (cursor: string | undefined): Record<string, any> | undefined => {
+  if (!cursor) {
+    return undefined;
+  }
+
+  return JSON.parse(Buffer.from(cursor, 'base64').toString('utf-8'));
+};

@@ -5,7 +5,7 @@ import { TestHelpers } from '../../common/testHelpers';
 
 const testHelpers = new TestHelpers();
 
-describe('When invoking service getProduct()', () => {
+describe('When invoking service.getProduct()', () => {
   afterAll(async () => {
     await testHelpers.teardown();
   });
