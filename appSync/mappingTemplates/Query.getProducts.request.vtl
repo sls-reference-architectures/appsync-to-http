@@ -1,12 +1,6 @@
 ## Extract and set the variables we want to use
 #set ($storeId = $context.arguments.input.storeId)
-#set ($limit = $context.arguments.input.limit)
-
-#if ($limit)
-  #set ($queryParams = { "limit": "${limit}" })
-#else
-   #set ($queryParams = {})
-#end
+#set ($limit = $util.defaultIfNullOrBlank($context.arguments.input.limit, null))
 
 ## Build HTTP request
 {
@@ -17,6 +11,8 @@
     "headers": {
       "x-custom-store-id": "${storeId}"
     },
-    "query": $util.toJson($queryParams)
+    "query": {
+      "limit": "${limit}"
+    }
   }
 }
