@@ -45,6 +45,20 @@ functions:
       - Effect: Allow
         Action: dynamodb:GetItem
         Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
+  getProducts:
+    handler: http/src/handlers.getProductsHandler
+    environment:
+      TABLE_NAME: ${self:custom.tableName}
+    events:
+      - httpApi:
+          method: GET
+          path: /products
+          authorizer:
+            type: aws_iam
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:Query
+        Resource: !Sub arn:aws:dynamodb:${self:provider.region}:${AWS::AccountId}:table/${self:custom.tableName}
   createProduct:
     handler: http/src/handlers.createProductHandler
     environment:

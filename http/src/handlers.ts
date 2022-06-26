@@ -4,7 +4,7 @@ import eventNormalizer from '@middy/http-event-normalizer';
 import errorHandler from '@middy/http-error-handler';
 import bodyParser from '@middy/http-json-body-parser';
 
-import { APIGatewayProxyEventMiddyNormalized, Product } from './models';
+import { APIGatewayProxyEventMiddyNormalized, PageResult, Product } from './models';
 import * as service from './service';
 
 const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Promise<Product> => {
@@ -19,6 +19,18 @@ const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Pro
   });
 
   return product;
+};
+
+const getProducts = async (
+  event: APIGatewayProxyEventMiddyNormalized<null>,
+): Promise<PageResult<Product>> => {
+  Logger.debug('In getProducts()', { event });
+  const {
+    headers: { 'x-custom-store-id': storeId },
+  } = event;
+  const result = await service.getProducts({ storeId: storeId ?? '' });
+
+  return result;
 };
 
 const createProduct = async (event: APIGatewayProxyEventMiddyNormalized<Product>) => {
@@ -40,7 +52,4 @@ export const createProductHandler = middy(createProduct)
   .use(eventNormalizer())
   .use(bodyParser())
   .use(errorHandler());
-
-export const placeHolder = () => {
-  Logger.debug('placeholder');
-};
+export const getProductsHandler = middy(getProducts).use(eventNormalizer()).use(errorHandler());
