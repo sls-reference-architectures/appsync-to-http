@@ -27,11 +27,12 @@ const getProducts = async (
   Logger.debug('In getProducts()', { event });
   const {
     headers: { 'x-custom-store-id': storeId },
-    queryStringParameters: { limit },
+    queryStringParameters: { limit, cursor },
   } = event;
   const result = await service.getProducts({
     storeId: storeId ?? '',
     limit: service.parseLimit(limit),
+    cursor,
   });
 
   return result;

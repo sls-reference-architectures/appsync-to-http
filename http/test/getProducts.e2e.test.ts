@@ -80,5 +80,44 @@ describe('When getting products', () => {
         { retries: 3 },
       );
     });
+
+    it('should respect cursor', async () => {
+      // ARRANGE
+      const storeId = ulid();
+      await testHelpers.createRandomProductInDb({ storeId });
+      const { productId: id2 } = await testHelpers.createRandomProductInDb({ storeId });
+      const route = '/products';
+      const options: AxiosRequestConfig = {
+        baseURL: process.env.HTTP_API_URL,
+        headers: {
+          'x-custom-store-id': storeId,
+        },
+        params: {
+          limit: 1,
+        },
+        validateStatus: () => true,
+      };
+
+      await retry(
+        async () => {
+          const {
+            data: { cursor },
+          }: AxiosResponse<PageResult<Product>> = await axios.get(route, options);
+          options.headers!.cursor = cursor!;
+
+          // ACT
+          const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
+            route,
+            options,
+          );
+
+          // ASSERT
+          expect(status).toEqual(200);
+          expect(pageResult.items).toHaveLength(1);
+          expect(pageResult.items[0].productId).toEqual(id2);
+        },
+        { retries: 3 },
+      );
+    });
   });
 });
