@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import aws4Interceptor from 'aws4-axios';
-// import retry from 'async-retry';
+import retry from 'async-retry';
 
+import { ulid } from 'ulid';
 import { TestHelpers } from '../../common/testHelpers';
 import { PageResult, Product } from '../src/models';
 
@@ -20,26 +21,63 @@ describe('When getting products', () => {
     await testHelpers.teardown();
   });
 
-  it('should return 200 with page result', async () => {
-    // ARRANGE
-    const route = '/products';
-    const options: AxiosRequestConfig = {
-      baseURL: process.env.HTTP_API_URL,
-      headers: {
-        'x-custom-store-id': 'does-not-exist',
-      },
-      validateStatus: () => true,
-    };
+  describe('with no items in the database', () => {
+    it('should return 200 with page result', async () => {
+      // ARRANGE
+      const route = '/products';
+      const options: AxiosRequestConfig = {
+        baseURL: process.env.HTTP_API_URL,
+        headers: {
+          'x-custom-store-id': 'does-not-exist',
+        },
+        validateStatus: () => true,
+      };
 
-    // ACT
-    const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
-      route,
-      options,
-    );
+      // ACT
+      const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
+        route,
+        options,
+      );
 
-    // ASSERT
-    expect(status).toEqual(200);
-    expect(pageResult.items).toBeArray();
-    expect(pageResult.items).toBeEmpty();
+      // ASSERT
+      expect(status).toEqual(200);
+      expect(pageResult.items).toBeArray();
+      expect(pageResult.items).toBeEmpty();
+    });
+  });
+
+  describe('when using limit', () => {
+    it('should restrict result to limit', async () => {
+      // ARRANGE
+      const storeId = ulid();
+      const { productId: id1 } = await testHelpers.createRandomProductInDb({ storeId });
+      await testHelpers.createRandomProductInDb({ storeId });
+      const route = '/products';
+      const options: AxiosRequestConfig = {
+        baseURL: process.env.HTTP_API_URL,
+        headers: {
+          'x-custom-store-id': 'does-not-exist',
+        },
+        params: {
+          limit: 1,
+        },
+        validateStatus: () => true,
+      };
+
+      await retry(
+        async () => {
+          // ACT
+          const { data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
+            route,
+            options,
+          );
+
+          // ASSERT
+          expect(pageResult.items).toHaveLength(1);
+          expect(pageResult.items[0].productId).toEqual(id1);
+        },
+        { retries: 3 },
+      );
+    });
   });
 });

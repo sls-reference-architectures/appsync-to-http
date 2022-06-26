@@ -11,6 +11,7 @@ export interface Product {
 export interface APIGatewayProxyEventMiddyNormalized<T>
   extends Omit<APIGatewayProxyEventV2, 'body'> {
   pathParameters: NonNullable<APIGatewayProxyEventV2['pathParameters']>;
+  queryStringParameters: NonNullable<APIGatewayProxyEventV2['queryStringParameters']>;
   body: T;
 }
 

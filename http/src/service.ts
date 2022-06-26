@@ -26,6 +26,14 @@ export const getProducts = async (input: GetProductsInput): Promise<PageResult<P
   return repo.getProducts(input);
 };
 
+export const parseLimit = (rawLimit: string | undefined): number | undefined => {
+  if (rawLimit === undefined) {
+    return undefined;
+  }
+
+  return +rawLimit;
+};
+
 export interface GetProductInput {
   productId: string;
   storeId: string;
