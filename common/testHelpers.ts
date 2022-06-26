@@ -58,8 +58,8 @@ export const GetProductQuery = /* GraphQL */ `
 `;
 
 export const GetProductsQuery = /* GraphQL */ `
-  query getProduct($input: GetProductInput!) {
-    getProduct(input: $input) {
+  query getProducts($input: GetProductsInput!) {
+    getProducts(input: $input) {
       items {
         name
         price
