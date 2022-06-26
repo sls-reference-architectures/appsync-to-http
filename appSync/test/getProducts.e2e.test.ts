@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import retry from 'async-retry';
 
-import { GetProductQuery, TestHelpers } from '../../common/testHelpers';
+import { GetProductsQuery, TestHelpers } from '../../common/testHelpers';
 
 const BaseUri = process.env.GRAPH_API_URL ?? '';
 
@@ -28,7 +28,7 @@ describe('When querying for Products', () => {
         // ACT
         const { data, status } = await axios.post(
           BaseUri,
-          { query: GetProductQuery, variables: { input } },
+          { query: GetProductsQuery, variables: { input } },
           requestOptions,
         );
 
