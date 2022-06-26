@@ -17,6 +17,6 @@
     "headers": {
       "x-custom-store-id": "${storeId}"
     },
-    "query": $queryParams
+    "query": $util.toJson($queryParams)
   }
 }
