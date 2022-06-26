@@ -56,7 +56,7 @@ describe('When getting products', () => {
       const options: AxiosRequestConfig = {
         baseURL: process.env.HTTP_API_URL,
         headers: {
-          'x-custom-store-id': 'does-not-exist',
+          'x-custom-store-id': storeId,
         },
         params: {
           limit: 1,
@@ -67,12 +67,13 @@ describe('When getting products', () => {
       await retry(
         async () => {
           // ACT
-          const { data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
+          const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
             route,
             options,
           );
 
           // ASSERT
+          expect(status).toEqual(200);
           expect(pageResult.items).toHaveLength(1);
           expect(pageResult.items[0].productId).toEqual(id1);
         },
