@@ -2,6 +2,12 @@
 #set ($storeId = $context.arguments.input.storeId)
 #set ($limit = $context.arguments.input.limit)
 
+#if ($limit)
+  #set ($queryParams = { "limit": "${limit}" })
+#else
+   #set ($queryParams = {})
+#end
+
 ## Build HTTP request
 {
   "version": "2018-05-29",
@@ -11,8 +17,6 @@
     "headers": {
       "x-custom-store-id": "${storeId}"
     },
-    "query": {
-      "limit": "${limit}"
-    }
+    "query": $queryParams
   }
 }
