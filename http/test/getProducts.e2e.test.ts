@@ -103,7 +103,7 @@ describe('When getting products', () => {
           const {
             data: { cursor },
           }: AxiosResponse<PageResult<Product>> = await axios.get(route, options);
-          options.headers!.cursor = cursor!;
+          options.params!.cursor = cursor!;
 
           // ACT
           const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
