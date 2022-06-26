@@ -1,5 +1,6 @@
 ## Extract and set the variables we want to use
 #set ($storeId = $context.arguments.input.storeId)
+#set ($limit = $context.arguments.input.limit)
 
 ## Build HTTP request
 {
@@ -9,6 +10,9 @@
   "params": {
     "headers": {
       "x-custom-store-id": "${storeId}"
+    },
+    "query": {
+      "limit": "${limit}"
     }
   }
 }
