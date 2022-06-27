@@ -1,6 +1,6 @@
 ## Extract and set the variables we want to use
 #set ($storeId = $context.arguments.input.storeId)
-#set ($limit = $util.defaultIfNullOrBlank($context.arguments.input.limit, null))
+#set ($limit = $context.arguments.input.limit)
 
 #if ($limit)
   #set ($queryParams = { "limit": "${limit}" })
