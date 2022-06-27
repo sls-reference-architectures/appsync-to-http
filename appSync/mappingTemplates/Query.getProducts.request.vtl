@@ -1,11 +1,14 @@
 ## Extract and set the variables we want to use
 #set ($storeId = $context.arguments.input.storeId)
 #set ($limit = $context.arguments.input.limit)
+#set ($cursor = $context.arguments.input.cursor)
+#set ($queryParams = {})
 
 #if ($limit)
-  #set ($queryParams = { "limit": "${limit}" })
-#else
-   #set ($queryParams = {})
+  $util.qr($queryParams.put("limit", "${limit}"))
+#end
+#if ($cursor)
+  $util.qr($queryParams.put("cursor", "${cursor}"))
 #end
 
 ## Build HTTP request

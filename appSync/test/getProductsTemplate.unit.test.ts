@@ -1,11 +1,11 @@
 import Parser from 'appsync-template-tester';
-import fs from 'fs';
-import path from 'path';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { ulid } from 'ulid';
 
 describe('When resolving getProducts request template', () => {
-  const template = fs.readFileSync(
-    path.join(__dirname, '../mappingTemplates', 'Query.getProducts.request.vtl'),
+  const template = readFileSync(
+    join(__dirname, '../mappingTemplates', 'Query.getProducts.request.vtl'),
     'utf-8',
   );
   const parser = new Parser(template);
@@ -65,6 +65,25 @@ describe('When resolving getProducts request template', () => {
 
       // ASSERT
       expect(result.params.query.limit).toEqual('42');
+    });
+  });
+
+  describe('with a value for cursor', () => {
+    it('should set query params with cursor', () => {
+      const context = {
+        arguments: {
+          input: {
+            storeId: 'x',
+            cursor: 'abc',
+          },
+        },
+      };
+
+      // ACT
+      const result = parser.resolve(context);
+
+      // ASSERT
+      expect(result.params.query.cursor).toEqual('abc');
     });
   });
 });
