@@ -9,6 +9,7 @@ describe('When resolving getProducts request template', () => {
     'utf-8',
   );
   const parser = new Parser(template);
+
   describe('with a valid context', () => {
     it('populates storeId header', () => {
       // ARRANGE
@@ -26,6 +27,44 @@ describe('When resolving getProducts request template', () => {
 
       // ASSERT
       expect(result.params.headers['x-custom-store-id']).toEqual(storeId);
+    });
+  });
+
+  describe('with no limit', () => {
+    it('should set query params to empty object', () => {
+      const context = {
+        arguments: {
+          input: {
+            storeId: 'x',
+          },
+        },
+      };
+
+      // ACT
+      const result = parser.resolve(context);
+
+      // ASSERT
+      expect(result.params.query).toBeObject();
+      expect(result.params.query).toBeEmpty();
+    });
+  });
+
+  describe('with a value for limit', () => {
+    it('should set query params with limit', () => {
+      const context = {
+        arguments: {
+          input: {
+            storeId: 'x',
+            limit: 42,
+          },
+        },
+      };
+
+      // ACT
+      const result = parser.resolve(context);
+
+      // ASSERT
+      expect(result.params.query.limit).toEqual('42');
     });
   });
 });
