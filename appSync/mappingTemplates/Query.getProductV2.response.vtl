@@ -1,0 +1,15 @@
+#if($ctx.error)
+  $util.error($ctx.error.message, $ctx.error.type)
+#end
+#if($ctx.result.statusCode == 200)
+  ## $ctx.result.body
+  #set($bodyObj = $util.parseJson($ctx.result.body))
+  {
+    "name": "$bodyObj.name",
+    "cost": "$bodyObj.price",
+    "productId": "$bodyObj.productId",
+    "storeId": "$bodyObj.storeId"
+  }
+#else
+  $utils.error("Delivery failed: $ctx.result.statusCode")
+#end

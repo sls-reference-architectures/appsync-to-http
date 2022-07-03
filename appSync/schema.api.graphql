@@ -1,6 +1,7 @@
 type Query {
   getProduct(input: GetProductInput!): Product!
   getProducts(input: GetProductsInput!): Products!
+  getProductV2(input: GetProductInput!): ProductV2!
 }
 
 type Mutation {
@@ -27,6 +28,13 @@ input GetProductsInput {
 type Product {
   name: String!
   price: Int!
+  productId: String!
+  storeId: String!
+}
+
+type ProductV2 {
+  name: String!
+  cost: Int!
   productId: String!
   storeId: String!
 }
