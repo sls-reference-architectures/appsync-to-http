@@ -8,7 +8,7 @@ import { APIGatewayProxyEventMiddyNormalized, PageResult, Product } from './mode
 import * as service from './service';
 
 const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Promise<Product> => {
-  Logger.debug('In getProduct()', { event });
+  Logger.debug('In handler.getProduct()', { event });
   const {
     pathParameters: { productId },
     headers: { 'x-custom-store-id': storeId },
