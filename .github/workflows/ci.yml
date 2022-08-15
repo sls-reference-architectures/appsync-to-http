@@ -15,7 +15,7 @@
     jobs:
       build-deploy-test:
         runs-on: ubuntu-latest
-
+        concurrency: build-deploy-test
         steps:
           - uses: actions/checkout@v2
           - name: Use Node.js ${{ matrix.node-version }}
