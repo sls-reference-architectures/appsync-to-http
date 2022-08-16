@@ -7,3 +7,9 @@ The app uses basic CRUD operations on a `Product` resource. AppSync will handle 
 All calls to the HTTP service will require IAM permissions and will expect appropriate v4sig-signed headers.
 
 ## Todo: VTL Summary
+
+### Data Source
+
+### Request
+
+### Response
