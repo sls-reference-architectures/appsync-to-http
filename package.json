@@ -63,10 +63,10 @@
     "@aws-sdk/client-dynamodb": "^3.160.0",
     "@aws-sdk/lib-dynamodb": "^3.160.0",
     "@dazn/lambda-powertools-logger": "^1.28.1",
-    "@middy/core": "^3.1.0",
-    "@middy/http-error-handler": "^3.1.0",
-    "@middy/http-event-normalizer": "^3.1.0",
-    "@middy/http-json-body-parser": "^3.1.0",
+    "@middy/core": "^3.3.0",
+    "@middy/http-error-handler": "^3.3.0",
+    "@middy/http-event-normalizer": "^3.3.0",
+    "@middy/http-json-body-parser": "^3.3.0",
     "ulid": "^2.3.0"
   },
   "lint-staged": {
