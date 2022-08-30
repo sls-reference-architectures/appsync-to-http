@@ -80,7 +80,6 @@ describe('When querying for Products', () => {
     it('should respect cursor with limit', async () => {
       // ARRANGE
       const storeId = ulid();
-      console.log(storeId);
       await testHelpers.createRandomProductInDb({ storeId });
       const { productId: id2 } = await testHelpers.createRandomProductInDb({ storeId });
       const requestOptions: AxiosRequestConfig = {
