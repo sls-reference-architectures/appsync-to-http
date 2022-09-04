@@ -28,7 +28,7 @@ const getStack = async (stackName: string): Promise<Stack> => {
   );
   const stack = stackResult.Stacks?.[0];
   if (!stack) {
-    throw new Error(`Could not find CF stack with name ${stackName}`);
+    throw new Error(`Could not find CFN stack with name ${stackName}`);
   }
 
   return stack;
