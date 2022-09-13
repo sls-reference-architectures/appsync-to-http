@@ -12,7 +12,7 @@ provider:
   environment:
     TABLE_NAME: ${self:custom.tableName}
   tags:
-    lumigo:auto-trace: true
+    lumigo:auto-trace: 'true'
 
 custom:
   appSync:
