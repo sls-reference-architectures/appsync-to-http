@@ -6,9 +6,9 @@ apiKeys:
 - name: test
   description: The test api key
   expiresAfter: 300d
-logConfig:
+logging:
   level: ALL
-  excludeVerboseContent: false
+  retentionInDays: 1
 resolvers:
   Query.getProduct:
     functions:
