@@ -10,7 +10,7 @@
     "test:e2e": "npx jest e2e.test --config jest.config.int.js --silent",
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
-    "deploy": "npx sls deploy",
+    "deploy": "npx sls deploy --conceal",
     "prepare": "husky install",
     "teardown": "npx sls remove"
   },

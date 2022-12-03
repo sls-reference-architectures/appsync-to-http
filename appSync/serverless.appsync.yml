@@ -36,8 +36,8 @@ dataSources:
     type: HTTP
     config:
       # The FIRST deploy won't have any reference yet, use placeholder endpoint
-      # endpoint: xyz
-      endpoint: ${cf:appsync-to-http-dev.HttpApiUrl}
+      endpoint: xyz
+      # endpoint: ${cf:appsync-to-http-dev.HttpApiUrl}
       authorizationConfig:
         authorizationType: AWS_IAM
         awsIamConfig:
