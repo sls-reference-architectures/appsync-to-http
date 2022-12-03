@@ -11,8 +11,7 @@
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
     "deploy": "npx sls deploy --conceal",
-    "prepare": "husky install",
-    "teardown": "npx sls remove"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",

@@ -29,11 +29,9 @@
             run: npm ci
           - name: Run unit tests
             run: npm test
-          # - name: Run int tests
-          #   run: npm run test:int
+          - name: Run int tests
+            run: npm run test:int
           - name: Deploy
             run: npm run deploy
-          # - name: Run E2E Tests
-          #   run: npm run test:e2e
-          # - name: Tear it down
-          #   run: npm run teardown
+          - name: Run E2E Tests
+            run: npm run test:e2e
