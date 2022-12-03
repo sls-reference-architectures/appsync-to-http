@@ -16,8 +16,8 @@ const setup = async (): Promise<void> => {
 };
 
 const getHttpApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
-const getGraphApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'AppsynctohttpGraphQlApiUrl')?.OutputValue;
-const getGraphApiKey = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'AppsynctohttpGraphQlApiKeytest')?.OutputValue;
+const getGraphApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiUrl')?.OutputValue;
+const getGraphApiKey = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiKey')?.OutputValue;
 
 const getStack = async (stackName: string): Promise<Stack> => {
   const cf = new CloudFormationClient({ region });

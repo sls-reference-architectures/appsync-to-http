@@ -100,3 +100,8 @@ resources:
           PointInTimeRecoveryEnabled: true
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+  Outputs:
+    GraphQLApiUrl:
+      Value: ${appsync:url}
+    GraphQLApiKey:
+      Value: ${appsync:apiKey.test}
