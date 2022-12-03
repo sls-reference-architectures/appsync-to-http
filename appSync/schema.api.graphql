@@ -2,6 +2,7 @@ type Query {
   getProduct(input: GetProductInput!): Product!
   getProducts(input: GetProductsInput!): Products!
   getProductV2(input: GetProductInput!): ProductV2!
+  getProductJS(input: GetProductInput!): Product!
 }
 
 type Mutation {

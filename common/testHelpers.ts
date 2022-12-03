@@ -57,6 +57,17 @@ export const GetProductQuery = /* GraphQL */ `
   }
 `;
 
+export const GetProductJSQuery = /* GraphQL */ `
+  query getProductJS($input: GetProductInput!) {
+    getProduct(input: $input) {
+      name
+      price
+      productId
+      storeId
+    }
+  }
+`;
+
 export const GetProductV2Query = /* GraphQL */ `
   query getProductV2($input: GetProductInput!) {
     getProductV2(input: $input) {

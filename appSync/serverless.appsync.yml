@@ -12,6 +12,10 @@ resolvers:
     - dataSource: ProductService
       request: appSync/resolvers/Query.getProduct.request.vtl
       response: appSync/resolvers/Query.getProduct.response.vtl
+  Query.getProductJS:
+    functions:
+    - dataSource: ProductService
+      code: appSync/resolvers/Query.getProduct.js
   Query.getProducts:
     functions:
     - dataSource: ProductService
