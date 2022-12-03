@@ -11,9 +11,8 @@
     "build": "rm -rf .build && npx tsc",
     "lint": "eslint . --ext .ts",
     "deploy": "npx sls deploy",
-    "deploy:http": "npx sls deploy --config serverless.http.yml",
-    "deploy:appSync": "npx sls deploy --config serverless.appSync.yml",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "teardown": "npx sls remove"
   },
   "repository": {
     "type": "git",
