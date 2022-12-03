@@ -1,7 +1,10 @@
 service: appsync-to-http
 
+configValidationMode: error
+
 provider:
   name: aws
+  logRetentionInDays: 7
   region: us-east-1
   runtime: nodejs16.x
   stage: ${opt:stage, 'dev'}
@@ -17,7 +20,6 @@ provider:
 custom:
   appSync:
     - ${file(appSync/serverless.appsync.yml)}
-  logRetentionInDays: 7
   prune:
     automatic: true
     number: 1
@@ -28,7 +30,6 @@ plugins:
   - serverless-esbuild
   - serverless-iam-roles-per-function
   - serverless-deployment-bucket
-  - serverless-plugin-log-retention
   - serverless-prune-plugin
 
 functions:
