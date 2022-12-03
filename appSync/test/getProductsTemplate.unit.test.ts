@@ -5,7 +5,7 @@ import { ulid } from 'ulid';
 
 describe('When resolving getProducts request template', () => {
   const template = readFileSync(
-    join(__dirname, '../mappingTemplates', 'Query.getProducts.request.vtl'),
+    join(__dirname, '../resolvers', 'Query.getProducts.request.vtl'),
     'utf-8',
   );
   const parser = new Parser(template);

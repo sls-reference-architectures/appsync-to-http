@@ -1,26 +1,34 @@
 name: appsync-to-http
 schema: appSync/schema.api.graphql
-authenticationType: API_KEY
+authentication:
+  type: API_KEY
 apiKeys:
-  - name: test
-    description: The test api key
-    expiresAfter: 300d
-mappingTemplatesLocation: appSync/mappingTemplates
-mappingTemplates:
-  - type: Query
-    field: getProduct
-    dataSource: ProductService
-  - type: Query
-    field: getProducts
-    dataSource: ProductService
-  - type: Mutation
-    field: createProduct
-    dataSource: ProductService
-  - type: Query
-    field: getProductV2
-    dataSource: ProductService
+- name: test
+  description: The test api key
+  expiresAfter: 300d
+resolvers:
+  Query.getProduct:
+    functions:
+    - dataSource: ProductService
+      request: appSync/resolvers/Query.getProduct.request.vtl
+      response: appSync/resolvers/Query.getProduct.response.vtl
+  Query.getProducts:
+    functions:
+    - dataSource: ProductService
+      request: appSync/resolvers/Query.getProducts.request.vtl
+      response: appSync/resolvers/Query.getProducts.response.vtl
+  Mutation.createProduct:
+    functions:
+    - dataSource: ProductService
+      request: appSync/resolvers/Mutation.createProduct.request.vtl
+      response: appSync/resolvers/Mutation.createProduct.response.vtl
+  Query.getProductV2:
+    functions:
+    - dataSource: ProductService
+      request: appSync/resolvers/Query.getProductV2.request.vtl
+      response: appSync/resolvers/Query.getProductV2.response.vtl
 dataSources:
-  - name: ProductService
+  ProductService:
     type: HTTP
     config:
       # The FIRST deploy won't have any reference yet, use placeholder endpoint
@@ -32,14 +40,14 @@ dataSources:
           signingRegion: ${self:provider.region}
           signingServiceName: execute-api
       iamRoleStatements:
-        - Effect: Allow
-          Action: 
-            - execute-api:Invoke
-          Resource: 
-            - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/GET/products/*
-            - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/GET/products
-            - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/POST/products
-  - name: EchoLambda
+      - Effect: Allow
+        Action: 
+        - execute-api:Invoke
+        Resource: 
+        - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/GET/products/*
+        - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/GET/products
+        - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsync-to-http-dev.HttpApiId}/*/POST/products
+  EchoLambda:
     type: AWS_LAMBDA
     config:
       functionName: echo
