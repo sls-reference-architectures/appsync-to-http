@@ -1,7 +1,6 @@
 import { util } from '@aws-appsync/utils';
 
 export function request(ctx) {
-  console.log(`Testing resolver logging: ${JSON.stringify(ctx)}`);
   const {
     arguments: {
       input: { storeId, productId },
