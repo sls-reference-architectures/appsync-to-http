@@ -38,11 +38,11 @@ dataSources:
       # The FIRST deploy won't have any reference yet, use placeholder endpoint
       endpoint: xyz
       # endpoint: ${cf:appsync-to-http-dev.HttpApiUrl}
-      authorizationConfig:
-        authorizationType: AWS_IAM
-        awsIamConfig:
-          signingRegion: ${self:provider.region}
-          signingServiceName: execute-api
+      # authorizationConfig:
+      #   authorizationType: AWS_IAM
+      #   awsIamConfig:
+      #     signingRegion: ${self:provider.region}
+      #     signingServiceName: execute-api
       # iamRoleStatements:
       # - Effect: Allow
       #   Action: 
