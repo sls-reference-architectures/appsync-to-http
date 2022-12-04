@@ -1,5 +1,4 @@
 import { util } from '@aws-appsync/utils';
-// const { util } = require('@aws-appsync/utils');
 
 export function request(ctx) {
   const {
@@ -31,8 +30,3 @@ export function response(ctx) {
 
   return ctx.result.body;
 }
-
-// module.exports = {
-//   request,
-//   response,
-// };
