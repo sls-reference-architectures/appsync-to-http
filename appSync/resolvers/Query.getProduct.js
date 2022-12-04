@@ -1,7 +1,7 @@
-// import { util } from '@aws-appsync/utils';
-const { util } = require('@aws-appsync/utils');
+import { util } from '@aws-appsync/utils';
+// const { util } = require('@aws-appsync/utils');
 
-function request(ctx) {
+export function request(ctx) {
   const {
     arguments: {
       input: { storeId, productId },
@@ -20,7 +20,7 @@ function request(ctx) {
   };
 }
 
-function response(ctx) {
+export function response(ctx) {
   if (ctx.error) {
     util.error(ctx.error.message, ctx.error.type);
   }
@@ -32,7 +32,7 @@ function response(ctx) {
   return ctx.result.body;
 }
 
-module.exports = {
-  request,
-  response,
-};
+// module.exports = {
+//   request,
+//   response,
+// };
