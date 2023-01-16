@@ -9,30 +9,30 @@ apiKeys:
 resolvers:
   Query.getProduct:
     functions:
-    - dataSource: ProductService
+    - dataSource: ProductsService
       request: appSync/resolvers/Query.getProduct.request.vtl
       response: appSync/resolvers/Query.getProduct.response.vtl
   Query.getProductJS:
     functions:
-    - dataSource: ProductService
+    - dataSource: ProductsService
       code: appSync/resolvers/Query.getProduct.js
   Query.getProducts:
     functions:
-    - dataSource: ProductService
+    - dataSource: ProductsService
       request: appSync/resolvers/Query.getProducts.request.vtl
       response: appSync/resolvers/Query.getProducts.response.vtl
   Mutation.createProduct:
     functions:
-    - dataSource: ProductService
+    - dataSource: ProductsService
       request: appSync/resolvers/Mutation.createProduct.request.vtl
       response: appSync/resolvers/Mutation.createProduct.response.vtl
   Query.getProductV2:
     functions:
-    - dataSource: ProductService
+    - dataSource: ProductsService
       request: appSync/resolvers/Query.getProductV2.request.vtl
       response: appSync/resolvers/Query.getProductV2.response.vtl
 dataSources:
-  ProductService:
+  ProductsService:
     type: HTTP
     config:
       # The FIRST deploy won't have any reference yet, use placeholder endpoint
