@@ -4,13 +4,21 @@ import { Product } from '../http/src/models';
 import ProductsRepository from '../http/src/repository';
 
 export const createRandomProduct = () => ({
-  productId: ulid(),
+  metadata: {
+    createdBy: `user_${ulid()}`,
+    sourceId: ulid(),
+  },
   name: `nifty-product-${ulid()}`,
   price: 42,
+  productId: ulid(),
   storeId: ulid(),
 });
 
 export const createRandomCreateProductInput = () => ({
+  metadata: {
+    createdBy: `user_${ulid()}`,
+    sourceId: ulid(),
+  },
   name: `nifty-product-${ulid()}`,
   price: 42,
   storeId: ulid(),
