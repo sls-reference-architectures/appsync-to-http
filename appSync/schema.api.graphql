@@ -15,6 +15,7 @@ input GetProductInput {
 }
 
 input CreateProductInput {
+  metadata: ProductMetadata!
   name: String!
   price: Int!
   storeId: String!
