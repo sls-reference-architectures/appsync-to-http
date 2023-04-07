@@ -59,11 +59,11 @@ describe('When creating a Product', () => {
       { query: CreateProductMutation, variables: { input } },
       requestOptions,
     );
-    testHelpers.trackProductForTeardown({ ...input, productId: data.data.createProduct.productId });
 
     // ASSERT
     expect(status).toEqual(200);
     expect(data.errors).toBeUndefined();
+    testHelpers.trackProductForTeardown({ ...input, productId: data.data.createProduct.productId });
     const {
       data: {
         createProduct: { productId },
