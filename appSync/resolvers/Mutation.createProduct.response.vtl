@@ -2,6 +2,8 @@
   $util.error($ctx.error.message, $ctx.error.type)
 #end
 #if($ctx.result.statusCode == 201)
+  $utils.qr($util.log.info("In Mutation.createProduct.response.vtl"))
+  $utils.qr($util.log.info($bodyObj))
   $ctx.result.body
 #else
   $utils.error("Delivery failed: $ctx.result.statusCode")
