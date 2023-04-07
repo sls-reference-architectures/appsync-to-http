@@ -3,6 +3,8 @@
 #end
 #if($ctx.result.statusCode == 201)
   $utils.qr($util.log.info("In Mutation.createProduct.response.vtl"))
+  $utils.qr($util.log.info($ctx.result.body))
+  #set($bodyObj = $util.parseJson($ctx.result.body))
   $utils.qr($util.log.info($bodyObj))
   $ctx.result.body
 #else
