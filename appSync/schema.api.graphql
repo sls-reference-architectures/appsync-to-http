@@ -15,10 +15,15 @@ input GetProductInput {
 }
 
 input CreateProductInput {
-  metadata: ProductMetadata!
+  metadata: ProductMetadataInput!
   name: String!
   price: Int!
   storeId: String!
+}
+
+input ProductMetadataInput {
+  createdBy: String!
+  sourceId: String!
 }
 
 input GetProductsInput {
