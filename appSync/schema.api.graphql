@@ -27,6 +27,7 @@ input GetProductsInput {
 }
 
 type Product {
+  metadata: ProductMetadata!
   name: String!
   price: Int!
   productId: String!
@@ -34,10 +35,16 @@ type Product {
 }
 
 type ProductV2 {
+  metadata: ProductMetadata!
   name: String!
   cost: Int!
   productId: String!
   storeId: String!
+}
+
+type ProductMetadata {
+  createdBy: String!
+  sourceId: String!
 }
 
 type CreateProductResult {
