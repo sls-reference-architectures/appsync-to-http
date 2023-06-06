@@ -67,7 +67,18 @@ export const GetProductQuery = /* GraphQL */ `
 
 export const GetProductJSQuery = /* GraphQL */ `
   query getProductJS($input: GetProductInput!) {
-    getProduct(input: $input) {
+    getProductJS(input: $input) {
+      name
+      price
+      productId
+      storeId
+    }
+  }
+`;
+
+export const GetProductJSInternalQuery = /* GraphQL */ `
+  query getProductJSInternal($input: GetProductInput!) {
+    getProductJSInternal(input: $input) {
       name
       price
       productId

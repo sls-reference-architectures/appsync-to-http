@@ -11,6 +11,7 @@ describe('When querying for Product', () => {
   afterAll(async () => {
     await testHelpers.teardown();
   });
+
   describe('with VTL resolver', () => {
     it('should return the Product', async () => {
       // ARRANGE
