@@ -4,6 +4,7 @@ import eventNormalizer from '@middy/http-event-normalizer';
 import errorHandler from '@middy/http-error-handler';
 import bodyParser from '@middy/http-json-body-parser';
 
+import inputOutputLogger from '@middy/input-output-logger';
 import { APIGatewayProxyEventMiddyNormalized, PageResult, Product } from './models';
 import * as service from './service';
 
@@ -52,9 +53,16 @@ const createProduct = async (event: APIGatewayProxyEventMiddyNormalized<Product>
   };
 };
 
-export const getProductHandler = middy(getProduct).use(eventNormalizer()).use(errorHandler());
+export const getProductHandler = middy(getProduct)
+  .use(inputOutputLogger())
+  .use(eventNormalizer())
+  .use(errorHandler());
 export const createProductHandler = middy(createProduct)
+  .use(inputOutputLogger())
   .use(eventNormalizer())
   .use(bodyParser())
   .use(errorHandler());
-export const getProductsHandler = middy(getProducts).use(eventNormalizer()).use(errorHandler());
+export const getProductsHandler = middy(getProducts)
+  .use(inputOutputLogger())
+  .use(eventNormalizer())
+  .use(errorHandler());
