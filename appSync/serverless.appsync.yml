@@ -18,6 +18,10 @@ resolvers:
     functions:
     - dataSource: ProductsService
       code: appSync/resolvers/Query.getProduct.js
+  Query.getProductJSInternal:
+    functions:
+    - dataSource: ProductsService
+      code: appSync/resolvers/Query.getProduct.js
   Query.getProducts:
     functions:
     - dataSource: ProductsService
