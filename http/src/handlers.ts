@@ -3,8 +3,8 @@ import middy from '@middy/core';
 import eventNormalizer from '@middy/http-event-normalizer';
 import errorHandler from '@middy/http-error-handler';
 import bodyParser from '@middy/http-json-body-parser';
-
 import inputOutputLogger from '@middy/input-output-logger';
+
 import { APIGatewayProxyEventMiddyNormalized, PageResult, Product } from './models';
 import * as service from './service';
 
