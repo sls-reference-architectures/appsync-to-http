@@ -11,13 +11,13 @@ describe('When querying for Product', () => {
   const axiosInstance = axios.create();
 
   afterAll(async () => {
-    await testHelpers.teardown();
+    // await testHelpers.teardown();
   });
 
   describe('from the internal-only endpoint', () => {
     it('should return the Product', async () => {
       // ARRANGE
-      const product = await testHelpers.createRandomProductInDb();
+      const { productId, storeId, name } = await testHelpers.createRandomProductInDb();
       const requestOptions: AxiosRequestConfig = {
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ describe('When querying for Product', () => {
         service: 'appsync',
       });
       axiosInstance.interceptors.request.use(interceptor);
-      const input = { productId: product.productId, storeId: product.storeId };
+      const input = { productId, storeId };
       const payload = { query: GetProductJSInternalQuery, variables: { input } };
       console.log(payload);
 
@@ -47,7 +47,7 @@ describe('When querying for Product', () => {
           // ASSERT
           expect(status).toEqual(200);
           expect(data.errors).toBeUndefined();
-          expect(data.data.getProductJSInternal.name).toEqual(product.name);
+          expect(data.data.getProductJSInternal.name).toEqual(name);
         },
         { retries: 3 },
       );

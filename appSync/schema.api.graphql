@@ -49,7 +49,7 @@ type ProductV2 {
   storeId: String!
 }
 
-type ProductMetadata {
+type ProductMetadata @aws_iam @aws_api_key {
   createdBy: String!
   sourceId: String!
 }
