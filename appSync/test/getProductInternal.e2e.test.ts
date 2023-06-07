@@ -11,7 +11,7 @@ describe.skip('When querying for Product', () => {
   const axiosInstance = axios.create();
 
   afterAll(async () => {
-    // await testHelpers.teardown();
+    await testHelpers.teardown();
   });
 
   describe('from the internal-only endpoint', () => {
