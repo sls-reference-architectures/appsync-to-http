@@ -1,0 +1,61 @@
+# JEST
+coverage
+
+# Mac OS
+.DS_Store
+
+# package directories
+node_modules
+
+# Serverless directories
+.serverless
+
+# TypeScript
+.build
+
+# JetBrains
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# dotenv environment variables file
+.env
+.env.test
+.env*.local
+
+### Local Config ###
+jmplatformdev.ts
+
+### yarn ###
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+.eslintcache
+
+# Developers config files
+config/*
+.vscode/*
+
+testReports/
+
+### yarn (we are using npm) ###
+yarn.lock
+yarn.error
+
+### Outputs ###
+output/
+types/.build
+
+api/schema.api.graphql
+api/schema.annotated.graphql

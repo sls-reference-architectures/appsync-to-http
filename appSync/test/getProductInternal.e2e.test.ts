@@ -2,11 +2,11 @@ import retry from 'async-retry';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import aws4Interceptor from 'aws4-axios';
 
-import { TestHelpers } from '../../common/testHelpers';
+import { GetProductJSInternalQuery, TestHelpers } from '../../common/testHelpers';
 
 const BaseUri = process.env.GRAPH_API_URL ?? '';
 
-describe.skip('When querying for Product', () => {
+describe('When querying for Product', () => {
   const testHelpers = new TestHelpers();
   const axiosInstance = axios.create();
 
@@ -30,8 +30,7 @@ describe.skip('When querying for Product', () => {
       });
       axiosInstance.interceptors.request.use(interceptor);
       const input = { productId, storeId };
-      const payload = { query: 'use query from test helpers', variables: { input } };
-      console.log(payload);
+      const payload = { query: GetProductJSInternalQuery, variables: { input } };
 
       await retry(
         async () => {
@@ -41,8 +40,6 @@ describe.skip('When querying for Product', () => {
             payload,
             requestOptions,
           );
-          console.log(status);
-          console.log(JSON.stringify(data, null, 2));
 
           // ASSERT
           expect(status).toEqual(200);

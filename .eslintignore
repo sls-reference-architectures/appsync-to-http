@@ -1,0 +1,4 @@
+# Ignore Generated Files
+**/node_modules/
+types
+.eslintrc.js
