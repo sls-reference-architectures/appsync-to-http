@@ -48,7 +48,6 @@ describe('When querying for Product', () => {
     it('should return the Product', async () => {
       // ARRANGE
       const product = await testHelpers.createRandomProductInDb();
-      // console.log(product)
       const requestOptions: AxiosRequestConfig = {
         headers: {
           'x-api-key': process.env.GRAPH_API_KEY ?? '',
