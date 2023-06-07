@@ -2,8 +2,8 @@ name: appsync-to-http
 schema: appSync/schema.api.graphql
 authentication:
   type: API_KEY
-additionalAuthentications:
-- type: AWS_IAM
+# additionalAuthentications:
+# - type: AWS_IAM
 apiKeys:
 - name: test
   description: The test api key
