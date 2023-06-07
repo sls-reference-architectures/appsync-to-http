@@ -27,8 +27,8 @@ export function response(ctx) {
     const message = `Delivery failed: ${ctx.result.statusCode}`;
     util.error(message);
   }
-  console.log('returning from resolver');
+  console.log('returning from resolverrr');
   console.log(ctx);
 
-  return ctx.result.body;
+  return JSON.parse(ctx.result.body);
 }
