@@ -69,7 +69,7 @@ describe('When querying for Product', () => {
           // ASSERT
           expect(status).toEqual(200);
           expect(data.errors).toBeUndefined();
-          expect(data.data.getProduct.name).toEqual(product.name);
+          expect(data.data.getProductJS.name).toEqual(product.name);
         },
         { retries: 3 },
       );
