@@ -50,8 +50,8 @@ type ProductV2 {
   storeId: String!
 }
 
-# type ProductMetadata @aws_iam @aws_api_key {
-type ProductMetadata {
+type ProductMetadata @aws_iam @aws_api_key {
+# type ProductMetadata {
   createdBy: String!
   sourceId: String!
 }

@@ -79,6 +79,10 @@ export const GetProductJSQuery = /* GraphQL */ `
 export const GetProductJSInternalQuery = /* GraphQL */ `
   query getProductJSInternal($input: GetProductInput!) {
     getProductJSInternal(input: $input) {
+      metadata {
+        createdBy
+        sourceId
+      }
       name
       price
       productId
