@@ -28,5 +28,5 @@ export function response(ctx) {
     util.error(message);
   }
 
-  return JSON.parse(ctx.result.body); // <-- Must return object now
+  return JSON.parse(ctx.result.body); // <-- Must return object in JS
 }

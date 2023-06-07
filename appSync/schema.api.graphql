@@ -3,7 +3,7 @@ type Query {
   getProducts(input: GetProductsInput!): Products!
   getProductV2(input: GetProductInput!): ProductV2!
   getProductJS(input: GetProductInput!): Product!
-  # getProductJSInternal(input: GetProductInput!): Product! @aws_iam
+  getProductJSInternal(input: GetProductInput!): Product! @aws_iam
 }
 
 type Mutation {
@@ -33,8 +33,8 @@ input GetProductsInput {
   cursor: String
 }
 
-# type Product @aws_iam @aws_api_key {
-type Product {
+type Product @aws_iam @aws_api_key {
+# type Product {
   metadata: ProductMetadata!
   name: String!
   price: Int!
