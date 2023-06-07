@@ -67,7 +67,7 @@ export const GetProductQuery = /* GraphQL */ `
 
 export const GetProductJSQuery = /* GraphQL */ `
   query getProductJS($input: GetProductInput!) {
-    getProductJS(input: $input) {
+    getProduct(input: $input) {
       name
       price
       productId
@@ -76,16 +76,16 @@ export const GetProductJSQuery = /* GraphQL */ `
   }
 `;
 
-export const GetProductJSInternalQuery = /* GraphQL */ `
-  query getProductJSInternal($input: GetProductInput!) {
-    getProductJSInternal(input: $input) {
-      name
-      price
-      productId
-      storeId
-    }
-  }
-`;
+// export const GetProductJSInternalQuery = /* GraphQL */ `
+//   query getProductJSInternal($input: GetProductInput!) {
+//     getProductJSInternal(input: $input) {
+//       name
+//       price
+//       productId
+//       storeId
+//     }
+//   }
+// `;
 
 export const GetProductV2Query = /* GraphQL */ `
   query getProductV2($input: GetProductInput!) {
