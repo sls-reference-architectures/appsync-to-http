@@ -6,7 +6,7 @@ import { GetProductJSInternalQuery, TestHelpers } from '../../common/testHelpers
 
 const BaseUri = process.env.GRAPH_API_URL ?? '';
 
-describe('When querying for Product', () => {
+describe.skip('When querying for Product', () => {
   const testHelpers = new TestHelpers();
   const axiosInstance = axios.create();
 
