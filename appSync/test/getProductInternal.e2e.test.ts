@@ -30,7 +30,7 @@ describe.skip('When querying for Product', () => {
       });
       axiosInstance.interceptors.request.use(interceptor);
       const input = { productId, storeId };
-      const payload = { query: 'GetProductJSInternalQuery', variables: { input } };
+      const payload = { query: 'use query from test helpers', variables: { input } };
       console.log(payload);
 
       await retry(
