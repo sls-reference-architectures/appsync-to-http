@@ -33,7 +33,8 @@ input GetProductsInput {
   cursor: String
 }
 
-type Product @aws_iam @aws_api_key {
+# type Product @aws_iam @aws_api_key {
+type Product @aws_api_key {
   metadata: ProductMetadata!
   name: String!
   price: Int!
@@ -49,7 +50,8 @@ type ProductV2 {
   storeId: String!
 }
 
-type ProductMetadata @aws_iam @aws_api_key {
+# type ProductMetadata @aws_iam @aws_api_key {
+type ProductMetadata @aws_api_key {
   createdBy: String!
   sourceId: String!
 }
