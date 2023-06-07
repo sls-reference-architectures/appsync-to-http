@@ -48,7 +48,34 @@ describe('When querying for Product', () => {
         },
         { retries: 3 },
       );
-      expect(true).toBeTrue();
+    });
+
+    describe('without signing the request', () => {
+      it('should return Unauthorized', async () => {
+        // ARRANGE
+        const newAxiosInstance = axios.create();
+        const { productId, storeId, name } = await testHelpers.createRandomProductInDb();
+        const requestOptions: AxiosRequestConfig = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          validateStatus: () => true,
+        };
+        const input = { productId, storeId };
+        const payload = { query: GetProductJSInternalQuery, variables: { input } };
+
+        // ACT
+        const { status, data }: AxiosResponse = await newAxiosInstance.post(
+          BaseUri,
+          payload,
+          requestOptions,
+        );
+
+        // ASSERT
+        expect(status).toEqual(200);
+        expect(data.errors).toBeUndefined();
+        expect(data.data.getProductJSInternal.name).toEqual(name);
+      });
     });
   });
 });
