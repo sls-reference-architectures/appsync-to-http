@@ -34,7 +34,6 @@ input GetProductsInput {
 }
 
 type Product @aws_iam @aws_api_key {
-# type Product {
   metadata: ProductMetadata!
   name: String!
   price: Int!
@@ -51,7 +50,6 @@ type ProductV2 {
 }
 
 type ProductMetadata @aws_iam @aws_api_key {
-# type ProductMetadata {
   createdBy: String!
   sourceId: String!
 }
