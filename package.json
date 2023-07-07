@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/sls-reference-architectures/appsync-to-http#readme",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.347.1",
+    "@aws-sdk/client-cloudformation": "^3.363.0",
     "@tsconfig/node16": "^1.0.4",
     "@types/async-retry": "^1.4.5",
     "@types/aws-lambda": "^8.10.116",
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@aws-appsync/utils": "^1.2.5",
-    "@aws-sdk/client-dynamodb": "^3.347.1",
+    "@aws-sdk/client-dynamodb": "^3.363.0",
     "@aws-sdk/lib-dynamodb": "^3.347.1",
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@middy/core": "^4.5.1",
