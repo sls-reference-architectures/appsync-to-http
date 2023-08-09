@@ -1,37 +1,41 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-    # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-    name: CI & Test
+name: CI & Test
 
-    on:
-      push:
-        branches: [master]
-      schedule:
-      - cron: 0 7 * * *
-        
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_REGION: us-east-1
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+on:
+  push:
+    branches: [ master ]
+  schedule:
+  - cron: 0 7 * * *
 
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
 
-    jobs:
-      build-deploy-test:
-        runs-on: ubuntu-latest
-        concurrency: build-deploy-test
-        steps:
-        - uses: actions/checkout@v2
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with:
-            node-version: "16.x"
-        - name: Install dependencies
-          run: npm ci
-        - name: Run unit tests
-          run: npm test
-        - name: Run int tests
-          run: npm run test:int
-        - name: Deploy
-          run: npm run deploy
-        - name: Run E2E Tests
-          run: npm run test:e2e
+jobs:
+  build-deploy-test:
+    runs-on: ubuntu-latest
+    concurrency: build-deploy-test
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+    - name: Install dependencies
+      run: npm ci
+    - name: Run unit tests
+      run: npm test
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-region: us-east-1
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+    - name: Run int tests
+      run: npm run test:int
+    - name: Deploy
+      run: npm run deploy
+    - name: Run E2E Tests
+      run: npm run test:e2e
