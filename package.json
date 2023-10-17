@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/sls-reference-architectures/appsync-to-http#readme",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.388.0",
+    "@aws-sdk/client-cloudformation": "^3.429.0",
     "@tsconfig/node16": "^1.0.4",
     "@types/async-retry": "^1.4.6",
     "@types/aws-lambda": "^8.10.116",
