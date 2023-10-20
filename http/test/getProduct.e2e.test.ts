@@ -24,8 +24,10 @@ describe('When getting product', () => {
       validateStatus: () => true,
     };
     const interceptor = aws4Interceptor({
-      region: process.env.AWS_REGION,
-      service: 'execute-api',
+      options: {
+        region: process.env.AWS_REGION,
+        service: 'execute-api',
+      },
     });
     axios.interceptors.request.use(interceptor);
 

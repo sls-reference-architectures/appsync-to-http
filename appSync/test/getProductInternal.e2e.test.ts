@@ -25,8 +25,10 @@ describe('When querying for Product', () => {
         validateStatus: () => true,
       };
       const interceptor = aws4Interceptor({
-        region: process.env.AWS_REGION,
-        service: 'appsync',
+        options: {
+          region: process.env.AWS_REGION,
+          service: 'appsync',
+        },
       });
       axiosInstance.interceptors.request.use(interceptor);
       const input = { productId, storeId };
