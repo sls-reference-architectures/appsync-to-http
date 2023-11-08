@@ -28,7 +28,7 @@
     "@tsconfig/node18": "^18.2.2",
     "@types/async-retry": "^1.4.8",
     "@types/aws-lambda": "^8.10.125",
-    "@types/aws4": "^1.11.5",
+    "@types/aws4": "^1.11.6",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.8",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
