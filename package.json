@@ -30,7 +30,7 @@
     "@types/aws-lambda": "^8.10.125",
     "@types/aws4": "^1.11.5",
     "@types/axios": "^0.14.0",
-    "@types/jest": "^29.5.6",
+    "@types/jest": "^29.5.8",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.10.0",
     "appsync-template-tester": "^1.1.19",
