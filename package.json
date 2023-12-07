@@ -69,7 +69,7 @@
     "@middy/core": "^5.1.0",
     "@middy/http-error-handler": "^4.7.0",
     "@middy/http-event-normalizer": "^4.7.0",
-    "@middy/http-json-body-parser": "^4.7.0",
+    "@middy/http-json-body-parser": "^5.1.0",
     "@middy/input-output-logger": "^4.7.0",
     "ulid": "^2.3.0"
   },
