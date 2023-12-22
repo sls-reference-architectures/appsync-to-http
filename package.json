@@ -62,7 +62,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@aws-appsync/utils": "^1.5.0",
+    "@aws-appsync/utils": "^1.6.0",
     "@aws-sdk/client-dynamodb": "^3.449.0",
     "@aws-sdk/lib-dynamodb": "^3.465.0",
     "@dazn/lambda-powertools-logger": "^1.28.1",
