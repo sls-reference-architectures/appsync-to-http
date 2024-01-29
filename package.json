@@ -27,7 +27,7 @@
     "@aws-sdk/client-cloudformation": "^3.496.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/async-retry": "^1.4.8",
-    "@types/aws-lambda": "^8.10.131",
+    "@types/aws-lambda": "^8.10.132",
     "@types/aws4": "^1.11.6",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.11",
