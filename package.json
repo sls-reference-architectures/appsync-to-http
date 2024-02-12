@@ -54,7 +54,7 @@
     "lint-staged": "^15.2.1",
     "prettier": "^3.2.5",
     "serverless": "^3.38",
-    "serverless-appsync-plugin": "^2.6.0",
+    "serverless-appsync-plugin": "^2.7.0",
     "serverless-deployment-bucket": "^1.6.0",
     "serverless-esbuild": "^1.50.2",
     "serverless-iam-roles-per-function": "^3.2.0",
