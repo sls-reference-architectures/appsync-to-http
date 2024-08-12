@@ -59,7 +59,7 @@
     "serverless-esbuild": "^1.52.1",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-prune-plugin": "^2.0.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@aws-appsync/utils": "^1.8.0",
