@@ -16,18 +16,13 @@ resolvers:
     kind: UNIT
     dataSource: ProductsService
     code: appSync/resolvers/getProduct.js
+  Query.getProductInternal:
+    kind: UNIT
+    dataSource: ProductsService
+    code: appSync/resolvers/getProduct.js
     # functions:
     # - dataSource: ProductsService
-    #   request: appSync/resolvers/Query.getProduct.request.vtl
-    #   response: appSync/resolvers/Query.getProduct.response.vtl
-  Query.getProductJS:
-    functions:
-    - dataSource: ProductsService
-      code: appSync/resolvers/Query.getProduct.js
-  Query.getProductJSInternal:
-    functions:
-    - dataSource: ProductsService
-      code: appSync/resolvers/Query.getProduct.js
+    #   code: appSync/resolvers/Query.getProduct.js
   Query.getProducts:
     functions:
     - dataSource: ProductsService
