@@ -10,7 +10,7 @@
     "test:e2e": "npx jest --testMatch '**/?(*.)+(e2e.test).js' --config jest.config.int.js",
     "lint": "eslint .",
     "deploy": "npx sls deploy --conceal",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "aws4": "^1.13.2",
     "aws4-axios": "^3.3.8",
     "axios": "^1.7.7",
-    "esbuild": "^0.20.2",
+    "esbuild": "^0.24.0",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
