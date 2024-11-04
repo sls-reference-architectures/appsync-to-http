@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import retry from 'async-retry';
 
 import {
@@ -20,7 +20,7 @@ describe('When creating a Product', () => {
   it('should return the new id', async () => {
     // ARRANGE
     const input = createRandomCreateProductInput();
-    const requestOptions: AxiosRequestConfig = {
+    const requestOptions = {
       headers: {
         'x-api-key': process.env.GRAPH_API_KEY ?? '',
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ describe('When creating a Product', () => {
   it('should be queryable', async () => {
     // ARRANGE
     const input = createRandomCreateProductInput();
-    const requestOptions: AxiosRequestConfig = {
+    const requestOptions = {
       headers: {
         'x-api-key': process.env.GRAPH_API_KEY ?? '',
         'Content-Type': 'application/json',

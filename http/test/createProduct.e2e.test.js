@@ -1,5 +1,5 @@
 import aws4Interceptor from 'aws4-axios';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import retry from 'async-retry';
 
 import { createRandomProduct, TestHelpers } from '../../common/testHelpers';
@@ -15,7 +15,7 @@ describe('When creating a product', () => {
     // ARRANGE
     const newProduct = createRandomProduct();
     const route = '/products';
-    const options: AxiosRequestConfig = {
+    const options = {
       baseURL: process.env.HTTP_API_URL,
       headers: {
         'x-custom-store-id': newProduct.storeId,
@@ -32,7 +32,7 @@ describe('When creating a product', () => {
 
     await retry(async () => {
       // ACT
-      const { status, data }: AxiosResponse = await axios.post(route, newProduct, options);
+      const { status, data } = await axios.post(route, newProduct, options);
 
       // ASSERT
       expect(status).toEqual(201);

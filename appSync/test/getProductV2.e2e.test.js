@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import retry from 'async-retry';
 
 import { GetProductV2Query, TestHelpers } from '../../common/testHelpers';
@@ -15,7 +15,7 @@ describe('When querying for Product', () => {
   it('should return the Product', async () => {
     // ARRANGE
     const product = await testHelpers.createRandomProductInDb();
-    const requestOptions: AxiosRequestConfig = {
+    const requestOptions = {
       headers: {
         'x-api-key': process.env.GRAPH_API_KEY ?? '',
         'Content-Type': 'application/json',

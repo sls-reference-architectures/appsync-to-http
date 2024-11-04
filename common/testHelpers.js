@@ -1,6 +1,5 @@
 import { ulid } from 'ulid';
 
-import { Product } from '../http/src/models';
 import ProductsRepository from '../http/src/repository';
 
 export const createRandomProduct = () => ({
@@ -25,16 +24,12 @@ export const createRandomCreateProductInput = () => ({
 });
 
 export class TestHelpers {
-  private repo: ProductsRepository;
-
-  private createdProducts: Product[];
-
   constructor() {
     this.repo = new ProductsRepository();
     this.createdProducts = [];
   }
 
-  async createRandomProductInDb(overrideWith?: Partial<Product>): Promise<Product> {
+  async createRandomProductInDb(overrideWith) {
     let product = createRandomProduct();
     if (overrideWith) {
       product = { ...product, ...overrideWith };
@@ -49,7 +44,7 @@ export class TestHelpers {
     await Promise.all(this.createdProducts.map(async (p) => this.repo.deleteProduct(p)));
   }
 
-  trackProductForTeardown(product: Product) {
+  trackProductForTeardown(product) {
     this.createdProducts.push(product);
   }
 }

@@ -1,9 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import aws4Interceptor from 'aws4-axios';
 import retry from 'async-retry';
 
 import { TestHelpers } from '../../common/testHelpers';
-import { Product } from '../src/models';
 
 const testHelpers = new TestHelpers();
 
@@ -16,7 +15,7 @@ describe('When getting product', () => {
     // ARRANGE
     const product = await testHelpers.createRandomProductInDb();
     const route = `/products/${product.productId}`;
-    const options: AxiosRequestConfig = {
+    const options = {
       baseURL: process.env.HTTP_API_URL,
       headers: {
         'x-custom-store-id': product.storeId,
@@ -34,7 +33,7 @@ describe('When getting product', () => {
     await retry(
       async () => {
         // ACT
-        const { status, data }: AxiosResponse<Product> = await axios.get(route, options);
+        const { status, data } = await axios.get(route, options);
 
         // ASSERT
         expect(status).toEqual(200);

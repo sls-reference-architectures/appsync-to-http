@@ -5,10 +5,9 @@ import errorHandler from '@middy/http-error-handler';
 import bodyParser from '@middy/http-json-body-parser';
 import inputOutputLogger from '@middy/input-output-logger';
 
-import { APIGatewayProxyEventMiddyNormalized, PageResult, Product } from './models';
 import * as service from './service';
 
-const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Promise<Product> => {
+const getProduct = async (event) => {
   Logger.debug('In handler.getProduct()', { event });
   const {
     pathParameters: { productId },
@@ -22,9 +21,7 @@ const getProduct = async (event: APIGatewayProxyEventMiddyNormalized<null>): Pro
   return product;
 };
 
-const getProducts = async (
-  event: APIGatewayProxyEventMiddyNormalized<null>,
-): Promise<PageResult<Product>> => {
+const getProducts = async (event) => {
   Logger.debug('In getProducts()', { event });
   const {
     headers: { 'x-custom-store-id': storeId },
@@ -39,7 +36,7 @@ const getProducts = async (
   return result;
 };
 
-const createProduct = async (event: APIGatewayProxyEventMiddyNormalized<Product>) => {
+const createProduct = async (event) => {
   Logger.debug('In createProduct()', { event });
   const {
     headers: { 'x-custom-store-id': storeId },

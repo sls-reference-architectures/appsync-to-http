@@ -1,5 +1,5 @@
 import retry from 'async-retry';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import aws4Interceptor from 'aws4-axios';
 
 import { GetProductJSInternalQuery, TestHelpers } from '../../common/testHelpers';
@@ -18,7 +18,7 @@ describe('When querying for Product', () => {
     it('should return the Product', async () => {
       // ARRANGE
       const { productId, storeId, name } = await testHelpers.createRandomProductInDb();
-      const requestOptions: AxiosRequestConfig = {
+      const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,11 +37,7 @@ describe('When querying for Product', () => {
       await retry(
         async () => {
           // ACT
-          const { status, data }: AxiosResponse = await axiosInstance.post(
-            BaseUri,
-            payload,
-            requestOptions,
-          );
+          const { status, data } = await axiosInstance.post(BaseUri, payload, requestOptions);
 
           // ASSERT
           expect(status).toEqual(200);
@@ -56,7 +52,7 @@ describe('When querying for Product', () => {
       it('should return Unauthorized', async () => {
         // ARRANGE
         const newAxiosInstance = axios.create();
-        const requestOptions: AxiosRequestConfig = {
+        const requestOptions = {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -66,11 +62,7 @@ describe('When querying for Product', () => {
         const payload = { query: GetProductJSInternalQuery, variables: { input } };
 
         // ACT
-        const { status }: AxiosResponse = await newAxiosInstance.post(
-          BaseUri,
-          payload,
-          requestOptions,
-        );
+        const { status } = await newAxiosInstance.post(BaseUri, payload, requestOptions);
 
         // ASSERT
         expect(status).toEqual(401);

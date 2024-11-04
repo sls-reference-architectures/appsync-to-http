@@ -1,10 +1,9 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import aws4Interceptor from 'aws4-axios';
 import retry from 'async-retry';
 
 import { ulid } from 'ulid';
 import { TestHelpers } from '../../common/testHelpers';
-import { PageResult, Product } from '../src/models';
 
 describe('When getting products', () => {
   const testHelpers = new TestHelpers();
@@ -27,7 +26,7 @@ describe('When getting products', () => {
     it('should return 200 with page result', async () => {
       // ARRANGE
       const route = '/products';
-      const options: AxiosRequestConfig = {
+      const options = {
         baseURL: process.env.HTTP_API_URL,
         headers: {
           'x-custom-store-id': 'does-not-exist',
@@ -36,10 +35,7 @@ describe('When getting products', () => {
       };
 
       // ACT
-      const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
-        route,
-        options,
-      );
+      const { status, data: pageResult } = await axios.get(route, options);
 
       // ASSERT
       expect(status).toEqual(200);
@@ -55,7 +51,7 @@ describe('When getting products', () => {
       const { productId: id1 } = await testHelpers.createRandomProductInDb({ storeId });
       await testHelpers.createRandomProductInDb({ storeId });
       const route = '/products';
-      const options: AxiosRequestConfig = {
+      const options = {
         baseURL: process.env.HTTP_API_URL,
         headers: {
           'x-custom-store-id': storeId,
@@ -69,10 +65,7 @@ describe('When getting products', () => {
       await retry(
         async () => {
           // ACT
-          const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
-            route,
-            options,
-          );
+          const { status, data: pageResult } = await axios.get(route, options);
 
           // ASSERT
           expect(status).toEqual(200);
@@ -89,7 +82,7 @@ describe('When getting products', () => {
       await testHelpers.createRandomProductInDb({ storeId });
       const { productId: id2 } = await testHelpers.createRandomProductInDb({ storeId });
       const route = '/products';
-      const options: AxiosRequestConfig = {
+      const options = {
         baseURL: process.env.HTTP_API_URL,
         headers: {
           'x-custom-store-id': storeId,
@@ -104,14 +97,11 @@ describe('When getting products', () => {
         async () => {
           const {
             data: { cursor },
-          }: AxiosResponse<PageResult<Product>> = await axios.get(route, options);
-          options.params!.cursor = cursor!;
+          } = await axios.get(route, options);
+          options.params.cursor = cursor;
 
           // ACT
-          const { status, data: pageResult }: AxiosResponse<PageResult<Product>> = await axios.get(
-            route,
-            options,
-          );
+          const { status, data: pageResult } = await axios.get(route, options);
 
           // ASSERT
           expect(status).toEqual(200);

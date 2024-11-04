@@ -1,9 +1,0 @@
-{
-  "extends": "@tsconfig/node18/tsconfig",
-  "compilerOptions": {
-    "module": "CommonJS", // Until we figure out the issue with ESM
-    "moduleResolution": "Node", // Until we figure out the issue with ESM
-    "outDir": ".build",
-    "sourceMap": true,
-  }
-}

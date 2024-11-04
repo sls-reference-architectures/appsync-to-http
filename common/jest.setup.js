@@ -4,7 +4,7 @@ import { CloudFormationClient, DescribeStacksCommand, Stack } from '@aws-sdk/cli
 const region = process.env.AWS_REGION || 'us-east-1';
 const stage = process.env.STAGE || 'dev';
 
-const setup = async (): Promise<void> => {
+const setup = async () => {
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
   process.env.TABLE_NAME = 'appsync-to-http-products';
@@ -15,11 +15,14 @@ const setup = async (): Promise<void> => {
   process.env.GRAPH_API_KEY = getGraphApiKey(stack);
 };
 
-const getHttpApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
-const getGraphApiUrl = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiUrl')?.OutputValue;
-const getGraphApiKey = (stack: Stack): string | undefined => stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiKey')?.OutputValue;
+const getHttpApiUrl = (stack) =>
+  stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
+const getGraphApiUrl = (stack) =>
+  stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiUrl')?.OutputValue;
+const getGraphApiKey = (stack) =>
+  stack.Outputs?.find((o) => o.OutputKey === 'GraphQLApiKey')?.OutputValue;
 
-const getStack = async (stackName: string): Promise<Stack> => {
+const getStack = async (stackName) => {
   const cf = new CloudFormationClient({ region });
   const stackResult = await cf.send(
     new DescribeStacksCommand({

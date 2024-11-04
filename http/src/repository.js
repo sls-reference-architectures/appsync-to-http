@@ -1,30 +1,21 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DeleteCommand,
-  DeleteCommandInput,
   DynamoDBDocumentClient,
   GetCommand,
-  GetCommandInput,
   PutCommand,
-  PutCommandInput,
   QueryCommand,
-  QueryCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 
-import { PageResult, Product } from './models';
-import { GetProductInput, GetProductsInput } from './service';
-
 export default class ProductsRepository {
-  private docClient: DynamoDBDocumentClient;
-
   constructor() {
     const ddbClient = new DynamoDBClient({ region: 'us-east-1' });
     this.docClient = DynamoDBDocumentClient.from(ddbClient);
   }
 
-  async getProduct(input: GetProductInput): Promise<Product> {
+  async getProduct(input) {
     const { storeId, productId } = input;
-    const params: GetCommandInput = {
+    const params = {
       TableName: process.env.TABLE_NAME,
       Key: {
         storeId,
@@ -33,19 +24,19 @@ export default class ProductsRepository {
     };
     const { Item: product } = await this.docClient.send(new GetCommand(params));
 
-    return product as Product;
+    return product;
   }
 
-  async saveProduct(product: Product): Promise<void> {
-    const params: PutCommandInput = {
+  async saveProduct(product) {
+    const params = {
       TableName: process.env.TABLE_NAME,
       Item: product,
     };
     await this.docClient.send(new PutCommand(params));
   }
 
-  async deleteProduct(product: Product): Promise<void> {
-    const params: DeleteCommandInput = {
+  async deleteProduct(product) {
+    const params = {
       TableName: process.env.TABLE_NAME,
       Key: {
         storeId: product.storeId,
@@ -55,9 +46,9 @@ export default class ProductsRepository {
     await this.docClient.send(new DeleteCommand(params));
   }
 
-  async getProducts(input: GetProductsInput): Promise<PageResult<Product>> {
+  async getProducts(input) {
     const { storeId, limit, cursor } = input;
-    const params: QueryCommandInput = {
+    const params = {
       TableName: process.env.TABLE_NAME,
       KeyConditionExpression: 'storeId = :storeId',
       ExpressionAttributeValues: {
@@ -71,13 +62,13 @@ export default class ProductsRepository {
     );
 
     return {
-      items: products as Product[],
+      items: products,
       cursor: createCursor(LastEvaluatedKey),
     };
   }
 }
 
-const createCursor = (lastEvaluatedKey: Record<string, any> | undefined): string | undefined => {
+const createCursor = (lastEvaluatedKey) => {
   if (lastEvaluatedKey === undefined) {
     return undefined;
   }
@@ -85,7 +76,7 @@ const createCursor = (lastEvaluatedKey: Record<string, any> | undefined): string
   return Buffer.from(JSON.stringify(lastEvaluatedKey)).toString('base64');
 };
 
-const parseCursor = (cursor: string | undefined): Record<string, any> | undefined => {
+const parseCursor = (cursor) => {
   if (!cursor) {
     return undefined;
   }

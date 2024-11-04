@@ -1,9 +1,8 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import retry from 'async-retry';
 
 import { ulid } from 'ulid';
 import { GetProductsQuery, TestHelpers } from '../../common/testHelpers';
-import { GetProductsInput } from '../../http/src/service';
 
 const BaseUri = process.env.GRAPH_API_URL ?? '';
 
@@ -16,7 +15,7 @@ describe('When querying for Products', () => {
 
   it('should return a page result', async () => {
     // ARRANGE
-    const requestOptions: AxiosRequestConfig = {
+    const requestOptions = {
       headers: {
         'x-api-key': process.env.GRAPH_API_KEY ?? '',
         'Content-Type': 'application/json',
@@ -49,7 +48,7 @@ describe('When querying for Products', () => {
       const storeId = ulid();
       const { productId: id1 } = await testHelpers.createRandomProductInDb({ storeId });
       await testHelpers.createRandomProductInDb({ storeId });
-      const requestOptions: AxiosRequestConfig = {
+      const requestOptions = {
         headers: {
           'x-api-key': process.env.GRAPH_API_KEY ?? '',
           'Content-Type': 'application/json',
@@ -82,14 +81,14 @@ describe('When querying for Products', () => {
       const storeId = ulid();
       await testHelpers.createRandomProductInDb({ storeId });
       const { productId: id2 } = await testHelpers.createRandomProductInDb({ storeId });
-      const requestOptions: AxiosRequestConfig = {
+      const requestOptions = {
         headers: {
           'x-api-key': process.env.GRAPH_API_KEY ?? '',
           'Content-Type': 'application/json',
         },
         validateStatus: () => true,
       };
-      const input: GetProductsInput = { storeId, limit: 1 };
+      const input = { storeId, limit: 1 };
 
       await retry(
         async () => {
