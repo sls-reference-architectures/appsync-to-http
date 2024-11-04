@@ -60,20 +60,9 @@ export const GetProductQuery = /* GraphQL */ `
   }
 `;
 
-export const GetProductJSQuery = /* GraphQL */ `
-  query getProductJS($input: GetProductInput!) {
-    getProductJS(input: $input) {
-      name
-      price
-      productId
-      storeId
-    }
-  }
-`;
-
-export const GetProductJSInternalQuery = /* GraphQL */ `
-  query getProductJSInternal($input: GetProductInput!) {
-    getProductJSInternal(input: $input) {
+export const GetProductInternalQuery = /* GraphQL */ `
+  query getProductInternal($input: GetProductInput!) {
+    getProductInternal(input: $input) {
       metadata {
         createdBy
         sourceId

@@ -2,7 +2,7 @@ import retry from 'async-retry';
 import axios from 'axios';
 import aws4Interceptor from 'aws4-axios';
 
-import { GetProductJSInternalQuery, TestHelpers } from '../../common/testHelpers';
+import { GetProductInternalQuery, TestHelpers } from '../../common/testHelpers';
 
 const BaseUri = process.env.GRAPH_API_URL ?? '';
 
@@ -32,7 +32,7 @@ describe('When querying for Product', () => {
       });
       axiosInstance.interceptors.request.use(interceptor);
       const input = { productId, storeId };
-      const payload = { query: GetProductJSInternalQuery, variables: { input } };
+      const payload = { query: GetProductInternalQuery, variables: { input } };
 
       await retry(
         async () => {
@@ -42,7 +42,7 @@ describe('When querying for Product', () => {
           // ASSERT
           expect(status).toEqual(200);
           expect(data.errors).toBeUndefined();
-          expect(data.data.getProductJSInternal.name).toEqual(name);
+          expect(data.data.getProductInternal.name).toEqual(name);
         },
         { retries: 3 },
       );
@@ -59,7 +59,7 @@ describe('When querying for Product', () => {
           validateStatus: () => true,
         };
         const input = { productId: 'x', storeId: 'x' };
-        const payload = { query: GetProductJSInternalQuery, variables: { input } };
+        const payload = { query: GetProductInternalQuery, variables: { input } };
 
         // ACT
         const { status } = await newAxiosInstance.post(BaseUri, payload, requestOptions);
