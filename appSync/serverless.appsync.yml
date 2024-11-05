@@ -32,10 +32,6 @@ resolvers:
     kind: UNIT
     dataSource: ProductsService
     code: appSync/resolvers/getProductV2.js
-    # functions:
-    # - dataSource: ProductsService
-    #   request: appSync/resolvers/Query.getProductV2.request.vtl
-    #   response: appSync/resolvers/Query.getProductV2.response.vtl
 dataSources:
 - ${file(appSync/dataSources/products.yml)}
 - ${file(appSync/dataSources/echo.yml)}
