@@ -34,7 +34,7 @@ const parseLimit = (rawLimit) => {
 };
 
 const publishProductEvents = async ({ dynamoDbStreamEvent }) => {
-  console.log('TODO', dynamoDbStreamEvent``);
+  Logger.debug('TODO', { dynamoDbStreamEvent });
 };
 
 export { getProduct, createProduct, getProducts, parseLimit, publishProductEvents };
