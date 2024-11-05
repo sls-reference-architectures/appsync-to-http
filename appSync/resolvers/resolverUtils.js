@@ -12,6 +12,20 @@ const parseHttpDataSourceResponse = (ctx) => {
   return JSON.parse(body);
 };
 
+const convertQueryForAppsyncJs = (query) => {
+  const convertedQuery = {};
+  Object.keys(query).forEach((key) => {
+    const value = query[key];
+    if (typeof value !== 'string') {
+      convertedQuery[key] = JSON.stringify(query[key]);
+    } else {
+      convertedQuery[key] = value;
+    }
+  });
+
+  return convertedQuery;
+};
+
 const isGqlError = (ctx) => !!ctx.error;
 const isServerErrorResult = (ctx) => !!ctx.result && ctx.result.statusCode >= 500;
 const isClientErrorResult = (ctx) =>
@@ -26,4 +40,4 @@ const handleDataSourceError = (ctx) => {
   }
 };
 
-export { parseHttpDataSourceResponse };
+export { convertQueryForAppsyncJs, parseHttpDataSourceResponse };

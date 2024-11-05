@@ -10,7 +10,7 @@ apiKeys:
   expiresAfter: 300d
 logging:
   level: ALL
-  retentionInDays: 7
+  retentionInDays: 3
 resolvers:
   Query.getProduct:
     kind: UNIT
@@ -20,14 +20,14 @@ resolvers:
     kind: UNIT
     dataSource: ProductsService
     code: appSync/resolvers/getProduct.js
+  Query.getProducts:
+    kind: UNIT
+    dataSource: ProductsService
+    code: appSync/resolvers/getProducts.js  
     # functions:
     # - dataSource: ProductsService
-    #   code: appSync/resolvers/Query.getProduct.js
-  Query.getProducts:
-    functions:
-    - dataSource: ProductsService
-      request: appSync/resolvers/Query.getProducts.request.vtl
-      response: appSync/resolvers/Query.getProducts.response.vtl
+    #   request: appSync/resolvers/Query.getProducts.request.vtl
+    #   response: appSync/resolvers/Query.getProducts.response.vtl
   Mutation.createProduct:
     functions:
     - dataSource: ProductsService
