@@ -116,7 +116,8 @@ resources:
           PointInTimeRecoveryEnabled: true
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-     ProductEventBus:
+    
+    ProductEventBus:
       Type: AWS::Events::EventBus
       Properties:
         Name: ${self:custom.eventBusName}
