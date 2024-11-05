@@ -20,6 +20,8 @@ provider:
 custom:
   esbuild:
     minify: true
+  eventBusARN: arn:aws:events:${self:provider.region}:${AWS::AccountId}:event-bus/${self:custom.eventBusName}
+  eventBusName: ${self:service}-products
   prune:
     automatic: true
     number: 1
@@ -79,6 +81,20 @@ functions:
   echo:
     handler: appSync/src/handlers.echo
 
+## Events
+  publishProductEvents:
+    handler: http/src/handlers.publishProductEventsHandler
+    events:
+      - stream:
+          type: dynamodb
+          arn: !GetAtt ProductTable.StreamArn
+          batchSize: 10
+          startingPosition: LATEST
+    iamRoleStatements:
+      - Effect: Allow
+        Action: events:PutEvents
+        Resource: !Sub ${self:custom.eventBusARN}
+
 resources:
   Resources:
     ProductTable:
@@ -100,6 +116,11 @@ resources:
           PointInTimeRecoveryEnabled: true
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+     ProductEventBus:
+      Type: AWS::Events::EventBus
+      Properties:
+        Name: ${self:custom.eventBusName}
+
   Outputs:
     GraphQLApiUrl:
       Value: ${appsync:url}

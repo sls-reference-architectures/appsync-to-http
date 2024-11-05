@@ -13,10 +13,7 @@ const getProduct = async (event) => {
     pathParameters: { productId },
     headers: { 'x-custom-store-id': storeId },
   } = event;
-  const product = await service.getProduct({
-    storeId: storeId ?? '',
-    productId: productId ?? '',
-  });
+  const product = await service.getProduct({ storeId, productId });
 
   return product;
 };
@@ -28,7 +25,7 @@ const getProducts = async (event) => {
     queryStringParameters: { limit, cursor },
   } = event;
   const result = await service.getProducts({
-    storeId: storeId ?? '',
+    storeId,
     limit: service.parseLimit(limit),
     cursor,
   });
@@ -42,12 +39,16 @@ const createProduct = async (event) => {
     headers: { 'x-custom-store-id': storeId },
     body,
   } = event;
-  const id = await service.createProduct({ ...body, storeId: storeId ?? '' });
+  const id = await service.createProduct({ ...body, storeId });
 
   return {
     statusCode: 201,
     body: JSON.stringify({ productId: id }),
   };
+};
+
+const publishProductEvents = async (event) => {
+  await service.publishProductEvents({ dynamoDbStreamEvent: event });
 };
 
 export const getProductHandler = middy(getProduct)
@@ -63,3 +64,4 @@ export const getProductsHandler = middy(getProducts)
   .use(inputOutputLogger())
   .use(eventNormalizer())
   .use(errorHandler());
+export const publishProductEventsHandler = middy(publishProductEvents).use(inputOutputLogger());
