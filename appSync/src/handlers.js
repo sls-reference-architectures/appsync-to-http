@@ -5,7 +5,3 @@ export const echo = async (event) => {
 
   return event;
 };
-
-export const placeHolder = () => {
-  Logger.debug('Will drop when we have 2nd export');
-};
