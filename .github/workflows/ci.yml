@@ -33,8 +33,8 @@ jobs:
       with:
         aws-region: us-east-1
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-    # - name: Run int tests
-    #   run: npm run test:int
+    - name: Run int tests
+      run: npm run test:int
     - name: Deploy HTTP
       run: npm run deploy:http
     - name: Deploy GQL
