@@ -1,0 +1,45 @@
+service: appsync-to-http/gql
+
+configValidationMode: error
+
+provider:
+  name: aws
+  logRetentionInDays: 7
+  region: us-east-1
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  deploymentBucket:
+    name: com.reference-architecture.deploys
+    maxPreviousDeploymentArtifacts: 5
+    serverSideEncryption: AES256
+  tags:
+    lumigo:auto-trace: 'true'
+
+custom:
+  esbuild:
+    minify: true
+  prune:
+    automatic: true
+    number: 1
+
+appSync: ${file(appSync/serverless.appsync.yml)}
+
+plugins:
+- serverless-appsync-plugin
+- serverless-esbuild
+- serverless-iam-roles-per-function
+- serverless-deployment-bucket
+- serverless-prune-plugin
+
+functions:
+  echo:
+    handler: appSync/src/handlers.echo
+
+## Events
+
+resources:
+  Outputs:
+    GraphQLApiUrl:
+      Value: ${appsync:url}
+    GraphQLApiKey:
+      Value: ${appsync:apiKey.test}
