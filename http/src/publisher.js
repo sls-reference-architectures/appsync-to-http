@@ -19,9 +19,11 @@ class Publisher {
         Logger.info('No events to publish');
         return;
       }
+      Logger.info('Publishing events', { allEntries });
       const eventBridgeClient = getEventBridgeClient();
       const putEventsCommand = new PutEventsCommand({ Entries: allEntries });
-      await eventBridgeClient.send(putEventsCommand);
+      const result = await eventBridgeClient.send(putEventsCommand);
+      Logger.info('Published events', { result });
     } catch (error) {
       Logger.error('Failed to publish events', { error });
       throw error;
