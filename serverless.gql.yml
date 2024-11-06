@@ -1,4 +1,4 @@
-service: appsync-to-http/gql
+service: appsyncToHttp-gql
 
 configValidationMode: error
 
