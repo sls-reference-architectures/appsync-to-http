@@ -84,6 +84,8 @@ functions:
 ## Events
   publishProductEvents:
     handler: http/src/handlers.publishProductEventsHandler
+    environment:
+      EVENT_BUS_NAME: ${self:custom.eventBusName}
     events:
       - stream:
           type: dynamodb

@@ -6,6 +6,9 @@ import bodyParser from '@middy/http-json-body-parser';
 import inputOutputLogger from '@middy/input-output-logger';
 
 import * as service from './service';
+import Publisher from './publisher';
+
+const publisher = new Publisher({ busName: process.env.EVENT_BUS_NAME });
 
 const getProduct = async (event) => {
   Logger.debug('In handler.getProduct()', { event });
@@ -48,7 +51,7 @@ const createProduct = async (event) => {
 };
 
 const publishProductEvents = async (event) => {
-  await service.publishProductEvents({ dynamoDbStreamEvent: event });
+  await publisher.publish({ dynamoDbStreamEvent: event, sourceName: 'products' });
 };
 
 export const getProductHandler = middy(getProduct)

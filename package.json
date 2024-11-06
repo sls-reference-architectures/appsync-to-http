@@ -52,7 +52,9 @@
   "dependencies": {
     "@aws-appsync/utils": "^1.10.1",
     "@aws-sdk/client-dynamodb": "^3.682.0",
+    "@aws-sdk/client-eventbridge": "^3.685.0",
     "@aws-sdk/lib-dynamodb": "^3.685.0",
+    "@aws-sdk/util-dynamodb": "^3.685.0",
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@middy/core": "^5.5.1",
     "@middy/http-error-handler": "^5.5.1",
