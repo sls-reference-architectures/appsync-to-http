@@ -8,7 +8,7 @@ import inputOutputLogger from '@middy/input-output-logger';
 import * as service from './service';
 import Publisher from './publisher';
 
-const publisher = new Publisher({ busName: process.env.EVENT_BUS_NAME });
+const publisher = new Publisher(process.env.EVENT_BUS_NAME);
 
 const getProduct = async (event) => {
   Logger.debug('In handler.getProduct()', { event });
