@@ -2,7 +2,7 @@ ProductsService:
   type: HTTP
   config:
     # The FIRST deploy won't have any reference yet, use placeholder endpoint
-    endpoint: ${cf:appsyncToHttp-gql-dev.HttpApiUrl}
+    endpoint: ${cf:appsyncToHttp-http-dev.HttpApiUrl}
     authorizationConfig:
       authorizationType: AWS_IAM
       awsIamConfig:
@@ -14,6 +14,6 @@ ProductsService:
       - execute-api:Invoke
       Resource: 
       # The FIRST deploy won't have any reference yet, use placeholder API ID
-      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-gql-dev.HttpApiId}/*/GET/products/*
-      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-gql-dev.HttpApiId}/*/GET/products
-      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-gql-dev.HttpApiId}/*/POST/products
+      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-http-dev.HttpApiId}/*/GET/products/*
+      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-http-dev.HttpApiId}/*/GET/products
+      - !Sub arn:aws:execute-api:${self:provider.region}:${AWS::AccountId}:${cf:appsyncToHttp-http-dev.HttpApiId}/*/POST/products
