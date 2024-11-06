@@ -36,8 +36,8 @@ jobs:
     # - name: Run int tests
     #   run: npm run test:int
     - name: Deploy HTTP
-      run: npm run deploy --config serverless.http.yml
+      run: npm run deploy:http
     - name: Deploy GQL
-      run: npm run deploy --config serverless.gql.yml
+      run: npm run deploy:gql
     - name: Run E2E Tests
       run: npm run test:e2e

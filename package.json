@@ -9,7 +9,8 @@
     "test:int": "npx jest --testMatch '**/?(*.)+(int.test).js' --config jest.config.int.js",
     "test:e2e": "npx jest --testMatch '**/?(*.)+(e2e.test).js' --config jest.config.int.js",
     "lint": "eslint .",
-    "deploy": "npx sls deploy --conceal",
+    "deploy:http": "npx sls deploy --config serverless.http.yml --conceal",
+    "deploy:gql": "npx sls deploy --config serverless.gql.yml --conceal",
     "prepare": "husky"
   },
   "repository": {
