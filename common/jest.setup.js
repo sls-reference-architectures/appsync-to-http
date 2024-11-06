@@ -8,11 +8,13 @@ const setup = async () => {
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
   process.env.TABLE_NAME = 'appsync-to-http-products';
-  const stackName = 'appsync-to-http-dev';
-  const stack = await getStack(stackName);
-  process.env.HTTP_API_URL = getHttpApiUrl(stack);
-  process.env.GRAPH_API_URL = getGraphApiUrl(stack);
-  process.env.GRAPH_API_KEY = getGraphApiKey(stack);
+  const httpStackName = 'appsync-to-http/http-dev';
+  const graphStackName = 'appsync-to-http/gql-dev';
+  const httpStack = await getStack(httpStackName);
+  const graphStack = await getStack(graphStackName);
+  process.env.HTTP_API_URL = getHttpApiUrl(httpStack);
+  process.env.GRAPH_API_URL = getGraphApiUrl(graphStack);
+  process.env.GRAPH_API_KEY = getGraphApiKey(graphStack);
 };
 
 const getHttpApiUrl = (stack) =>
