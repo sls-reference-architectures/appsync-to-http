@@ -96,7 +96,7 @@ functions:
     handler: appSync/src/handlers.onProductCreated
     events: 
       - eventBridge:
-          eventBus: ${cf:appsyncToHttp-http-dev.EventBusName}
+          eventBus: ${cf:appsyncToHttp-http-dev.EventBusArn}
           pattern:
             source:
               - products

@@ -118,3 +118,5 @@ resources:
   Outputs:
     EventBusName:
       Value: !GetAtt ProductEventBus.Name
+    EventBusArn:
+      Value: !GetAtt ProductEventBus.Arn
