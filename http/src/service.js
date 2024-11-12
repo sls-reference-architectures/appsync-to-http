@@ -33,8 +33,4 @@ const parseLimit = (rawLimit) => {
   return +rawLimit;
 };
 
-const publishProductEvents = async ({ dynamoDbStreamEvent }) => {
-  Logger.debug('TODO', { dynamoDbStreamEvent });
-};
-
-export { getProduct, createProduct, getProducts, parseLimit, publishProductEvents };
+export { getProduct, createProduct, getProducts, parseLimit };

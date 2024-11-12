@@ -22,7 +22,44 @@ custom:
     automatic: true
     number: 1
 
-appSync: ${file(appSync/serverless.appsync.yml)}
+appSync:
+  name: appsync-to-http
+  schema: appSync/schema.api.graphql
+  authentication:
+    type: API_KEY
+  additionalAuthentications:
+  - type: AWS_IAM
+  apiKeys:
+  - name: test
+    description: The test api key
+    expiresAfter: 300d
+  logging:
+    level: ALL
+    retentionInDays: 3
+  resolvers:
+    Query.getProduct:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/getProduct.js
+    Query.getProductInternal:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/getProduct.js
+    Query.getProducts:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/getProducts.js  
+    Mutation.createProduct:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/createProduct.js
+    Query.getProductV2:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/getProductV2.js
+  dataSources:
+  - ${file(appSync/dataSources/products.yml)}
+  - ${file(appSync/dataSources/echo.yml)}
 
 plugins:
 - serverless-appsync-plugin
