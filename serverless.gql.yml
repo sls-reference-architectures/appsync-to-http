@@ -92,7 +92,16 @@ plugins:
 functions:
   echo:
     handler: appSync/src/handlers.echo
-
+  onProductCreated:
+    handler: appSync/src/handlers.onProductCreated
+    events: 
+      - eventBridge:
+          eventBus: ${cf:appsyncToHttp-http-dev.EventBusName}
+          pattern:
+            source:
+              - products
+            detail-type:
+              - create
 ## Events
 
 resources:

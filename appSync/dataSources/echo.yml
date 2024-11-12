@@ -1,4 +1,0 @@
-EchoLambda:
-  type: AWS_LAMBDA
-  config:
-    functionName: echo
