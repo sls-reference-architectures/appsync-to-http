@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   createProduct(input: CreateProductInput!): CreateProductResult!
 
-  notifyProductCreated(storeId: String!): NotifyProductResult!
+  notifyProductCreated(input: NotifyProductCreatedInput): Product!
   @aws_iam
 }
 
@@ -38,6 +38,14 @@ input GetProductsInput {
   storeId: String!
   limit: Int
   cursor: String
+}
+
+input NotifyProductCreatedInput{
+  metadata: ProductMetadataInput!
+  name: String!
+  price: Int!
+  productId: String!
+  storeId: String!
 }
 
 type Product @aws_iam @aws_api_key {
