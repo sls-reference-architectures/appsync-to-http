@@ -37,6 +37,14 @@ appSync:
     level: ALL
     retentionInDays: 3
   resolvers:
+    Mutation.createProduct:
+      kind: UNIT
+      dataSource: ProductsService
+      code: appSync/resolvers/createProduct.js
+    Mutation.notifyProductCreated:
+      kind: UNIT
+      dataSource: None
+      code: appSync/resolvers/notifyProductCreated.js
     Query.getProduct:
       kind: UNIT
       dataSource: ProductsService
@@ -49,10 +57,6 @@ appSync:
       kind: UNIT
       dataSource: ProductsService
       code: appSync/resolvers/getProducts.js  
-    Mutation.createProduct:
-      kind: UNIT
-      dataSource: ProductsService
-      code: appSync/resolvers/createProduct.js
     Query.getProductV2:
       kind: UNIT
       dataSource: ProductsService
@@ -62,6 +66,8 @@ appSync:
       type: AWS_LAMBDA
       config:
         functionName: echo
+    None:
+      type: NONE
     ProductsService:
       type: HTTP
       config:

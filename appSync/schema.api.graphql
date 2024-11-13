@@ -7,6 +7,14 @@ type Query {
 
 type Mutation {
   createProduct(input: CreateProductInput!): CreateProductResult!
+
+  notifyProductCreated(storeId: String!): NotifyProductResult!
+  @aws_iam
+}
+
+type Subscription {
+  onProductCreated(storeId: String!): Product
+  @aws_subscribe(mutations: ["notifyProductCreated"])
 }
 
 input GetProductInput {
@@ -60,4 +68,8 @@ type CreateProductResult {
 type Products {
   items: [Product!]!
   cursor: String
+}
+
+type NotifyProductResult @aws_iam @aws_api_key {
+  storeId: String!
 }
