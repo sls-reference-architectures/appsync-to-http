@@ -107,7 +107,7 @@ functions:
             source:
               - products
             detail-type:
-              - create
+              - store-admin.create
 ## Events
 
 resources:

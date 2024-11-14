@@ -51,7 +51,12 @@ const createProduct = async (event) => {
 };
 
 const publishProductEvents = async (event) => {
-  await publisher.publish({ dynamoDbStreamEvent: event, sourceName: 'products' });
+  await publisher.publish({
+    domain: 'ecommerce',
+    dynamoDbStreamEvent: event,
+    service: 'store-admin',
+    source: 'products',
+  });
 };
 
 export const getProductHandler = middy(getProduct)

@@ -1,6 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ulid } from 'ulid';
+import axios from 'axios';
 
 import ProductsRepository from '../http/src/repository';
+
+export const createTestId = () => `test_${ulid()}`;
 
 export const createRandomProduct = () => ({
   metadata: {
@@ -36,6 +40,29 @@ export class TestHelpers {
     }
     await this.repo.saveProduct(product);
     this.createdProducts.push(product);
+
+    return product;
+  }
+
+  async createRandomProductGql(overrideWith) {
+    const createProductInput = { ...createRandomCreateProductInput(), ...overrideWith };
+    const requestOptions = {
+      headers: {
+        'x-api-key': process.env.GRAPH_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      validateStatus: () => true,
+    };
+    const { data, status } = await axios.post(
+      process.env.GRAPH_API_URL,
+      { query: CreateProductMutation, variables: { input: createProductInput } },
+      requestOptions,
+    );
+    expect(status).toEqual(200);
+    expect(data.errors).toBeUndefined();
+    const { id } = data.data.createProduct;
+    const product = { ...createProductInput, productId: id };
+    this.trackProductForTeardown(product);
 
     return product;
   }
@@ -104,6 +131,21 @@ export const CreateProductMutation = /* GraphQL */ `
   mutation createProduct($input: CreateProductInput!) {
     createProduct(input: $input) {
       productId
+    }
+  }
+`;
+
+export const OnProductCreatedSubscription = /* GraphQL */ `
+  subscription onProductCreated {
+    onProductCreated {
+      metadata {
+        createdBy
+        sourceId
+      }
+      name
+      price
+      productId
+      storeId
     }
   }
 `;

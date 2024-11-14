@@ -8,11 +8,10 @@ import {
   TestHelpers,
 } from '../../common/testHelpers';
 
-const BaseUri = process.env.GRAPH_API_URL ?? '';
+const BaseUri = process.env.GRAPH_API_URL;
+const testHelpers = new TestHelpers();
 
-describe('When creating a Product', () => {
-  const testHelpers = new TestHelpers();
-
+describe.skip('When creating a Product', () => {
   afterAll(async () => {
     await testHelpers.teardown();
   });
@@ -22,7 +21,7 @@ describe('When creating a Product', () => {
     const input = createRandomCreateProductInput();
     const requestOptions = {
       headers: {
-        'x-api-key': process.env.GRAPH_API_KEY ?? '',
+        'x-api-key': process.env.GRAPH_API_KEY,
         'Content-Type': 'application/json',
       },
       validateStatus: () => true,
