@@ -3,15 +3,17 @@ service: appsyncToHttp-gql
 configValidationMode: error
 
 provider:
-  name: aws
-  logRetentionInDays: 7
-  region: us-east-1
-  runtime: nodejs20.x
-  stage: ${opt:stage, 'dev'}
   deploymentBucket:
     name: com.reference-architecture.deploys
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
+  environment:
+    GRAPH_API_URL: ${appsync:url}
+  logRetentionInDays: 7
+  name: aws
+  region: us-east-1
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
   tags:
     lumigo:auto-trace: 'true'
 
