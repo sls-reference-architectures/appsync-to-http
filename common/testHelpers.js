@@ -136,8 +136,8 @@ export const CreateProductMutation = /* GraphQL */ `
 `;
 
 export const OnProductCreatedSubscription = /* GraphQL */ `
-  subscription onProductCreated {
-    onProductCreated {
+  subscription onProductCreated($storeId: String!) {
+    onProductCreated(storeId: $storeId) {
       metadata {
         createdBy
         sourceId

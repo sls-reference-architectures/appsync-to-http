@@ -108,6 +108,10 @@ functions:
               - products
             detail-type:
               - store-admin.create
+    iamRoleStatements:
+      - Effect: Allow
+        Action: appsync:GraphQL
+        Resource: ${appsync:arn}/*
 ## Events
 
 resources:

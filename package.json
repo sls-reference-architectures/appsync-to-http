@@ -30,9 +30,6 @@
     "@types/jest": "^29.5.14",
     "async-retry": "^1.3.3",
     "aws-amplify": "^6.8.1",
-    "aws4": "^1.13.2",
-    "aws4-axios": "^3.3.8",
-    "axios": "^1.7.7",
     "esbuild": "^0.24.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -64,6 +61,8 @@
     "@middy/http-event-normalizer": "^5.5.1",
     "@middy/http-json-body-parser": "^5.5.1",
     "@middy/input-output-logger": "^5.5.1",
+    "aws4-axios": "^3.3.8",
+    "axios": "^1.7.7",
     "ulid": "^2.3.0"
   },
   "lint-staged": {

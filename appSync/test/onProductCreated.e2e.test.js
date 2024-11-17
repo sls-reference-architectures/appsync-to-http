@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Amplify } from 'aws-amplify';
-import { CONNECTION_STATE_CHANGE, generateClient } from 'aws-amplify/api';
-import { Hub } from 'aws-amplify/utils';
+// import { CONNECTION_STATE_CHANGE, generateClient } from 'aws-amplify/api';
+// import { Hub } from 'aws-amplify/utils';
 import retry from 'async-retry';
 
 import { createTestId, OnProductCreatedSubscription, TestHelpers } from '../../common/testHelpers';
+import { setUpSubscription } from './graphqlTestHelpers';
 
 const testHelpers = new TestHelpers();
 
@@ -13,16 +13,16 @@ describe('When a Product is created', () => {
   let stopHubListener;
 
   beforeAll(async () => {
-    Amplify.configure({
-      API: {
-        GraphQL: {
-          endpoint: process.env.GRAPH_API_URL,
-          region: process.env.AWS_REGION,
-          defaultAuthMode: 'apiKey',
-          apiKey: process.env.GRAPH_API_KEY,
-        },
-      },
-    });
+    // Amplify.configure({
+    //   API: {
+    //     GraphQL: {
+    //       endpoint: process.env.GRAPH_API_URL,
+    //       region: process.env.AWS_REGION,
+    //       defaultAuthMode: 'apiKey',
+    //       apiKey: process.env.GRAPH_API_KEY,
+    //     },
+    //   },
+    // });
   });
 
   afterAll(async () => {
@@ -33,11 +33,12 @@ describe('When a Product is created', () => {
 
   it('should fire the onProductCreated subscription', async () => {
     // ARRANGE
+    // ({ subscription, stopHubListener } = await setUpSubscription())
     const messages = [];
     const storeId = createTestId();
     ({ subscription, stopHubListener } = await setUpSubscription({
       query: OnProductCreatedSubscription,
-      storeId,
+      variables: { storeId },
       resultsArray: messages,
     }));
 
@@ -50,36 +51,36 @@ describe('When a Product is created', () => {
         expect(messages.length).toBe(1);
         expect(messages[0].onProductCreated.productId).toBe(product.productId);
       },
-      { retries: 5 },
+      { retries: 4 },
     );
   });
 });
 
-const setUpSubscription = async ({ query, storeId, resultsArray }) => {
-  let connectionState;
-  const stopHubListener = Hub.listen('api', (data) => {
-    const { payload } = data;
-    if (payload.event === CONNECTION_STATE_CHANGE) {
-      const { connectionState: inFlightState } = payload.data;
-      console.log(inFlightState);
-      connectionState = inFlightState;
-    }
-  });
-  const client = generateClient();
-  const subscription = await client
-    .graphql({
-      query,
-      variables: { storeId },
-    })
-    .subscribe({
-      next: ({ data }) => resultsArray.push(data.onJobCreated),
-      error: (err) => console.warn(err),
-    });
-  await retry(
-    async () => {
-      expect(connectionState).toBe('Connected');
-    },
-    { retries: 4 },
-  );
-  return { subscription, stopHubListener };
-};
+// const setUpSubscription = async ({ query, storeId, resultsArray }) => {
+//   let connectionState;
+//   const stopHubListener = Hub.listen('api', (data) => {
+//     const { payload } = data;
+//     if (payload.event === CONNECTION_STATE_CHANGE) {
+//       const { connectionState: inFlightState } = payload.data;
+//       console.log(inFlightState);
+//       connectionState = inFlightState;
+//     }
+//   });
+//   const client = generateClient();
+//   const subscription = await client
+//     .graphql({
+//       query,
+//       variables: { storeId },
+//     })
+//     .subscribe({
+//       next: ({ data }) => resultsArray.push(data.onJobCreated),
+//       error: (err) => console.warn(err),
+//     });
+//   await retry(
+//     async () => {
+//       expect(connectionState).toBe('Connected');
+//     },
+//     { retries: 4 },
+//   );
+//   return { subscription, stopHubListener };
+// };
