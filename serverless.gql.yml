@@ -98,6 +98,7 @@ plugins:
 functions:
   echo:
     handler: appSync/src/handlers.echo
+  ## Events
   onProductCreated:
     handler: appSync/src/handlers.onProductCreated
     events: 
@@ -111,8 +112,8 @@ functions:
     iamRoleStatements:
       - Effect: Allow
         Action: appsync:GraphQL
-        Resource: ${appsync:arn}/*
-## Events
+        Resource: 
+          - Fn::Join: ["", [!GetAtt GraphQlApi.Arn, "/*"]] 
 
 resources:
   Outputs:
