@@ -36,6 +36,7 @@ describe.skip('When a Product is created', () => {
     // ({ subscription, stopHubListener } = await setUpSubscription())
     const messages = [];
     const storeId = createTestId();
+    console.log('storeId:', storeId);
     ({ subscription, stopHubListener } = await setUpSubscription({
       query: OnProductCreatedSubscription,
       variables: { storeId },

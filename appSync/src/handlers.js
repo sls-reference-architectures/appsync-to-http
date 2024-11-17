@@ -10,7 +10,7 @@ const echo = async (event) => {
 
 const onProductCreated = async (event) => {
   Logger.debug('In onProductCreated()', { event });
-  const { detail: product } = event;
+  const { data: product } = event.detail;
   const { data, errors, headers, status } = await executeSignedQuery({
     query: NotifyProductCreatedMutation,
     url: process.env.GRAPH_API_URL,
