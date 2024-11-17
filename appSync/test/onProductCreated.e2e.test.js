@@ -1,6 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// import { CONNECTION_STATE_CHANGE, generateClient } from 'aws-amplify/api';
-// import { Hub } from 'aws-amplify/utils';
 import retry from 'async-retry';
 
 import { createTestId, OnProductCreatedSubscription, TestHelpers } from '../../common/testHelpers';
@@ -8,35 +6,20 @@ import { setUpSubscription } from './graphqlTestHelpers';
 
 const testHelpers = new TestHelpers();
 
-describe.skip('When a Product is created', () => {
+describe('When a Product is created', () => {
   let subscription;
   let stopHubListener;
 
-  beforeAll(async () => {
-    // Amplify.configure({
-    //   API: {
-    //     GraphQL: {
-    //       endpoint: process.env.GRAPH_API_URL,
-    //       region: process.env.AWS_REGION,
-    //       defaultAuthMode: 'apiKey',
-    //       apiKey: process.env.GRAPH_API_KEY,
-    //     },
-    //   },
-    // });
-  });
-
   afterAll(async () => {
-    await stopHubListener();
     await subscription.unsubscribe();
+    await stopHubListener();
     await testHelpers.teardown();
   });
 
   it('should fire the onProductCreated subscription', async () => {
     // ARRANGE
-    // ({ subscription, stopHubListener } = await setUpSubscription())
     const messages = [];
     const storeId = createTestId();
-    console.log('storeId:', storeId);
     ({ subscription, stopHubListener } = await setUpSubscription({
       query: OnProductCreatedSubscription,
       variables: { storeId },
@@ -56,32 +39,3 @@ describe.skip('When a Product is created', () => {
     );
   });
 });
-
-// const setUpSubscription = async ({ query, storeId, resultsArray }) => {
-//   let connectionState;
-//   const stopHubListener = Hub.listen('api', (data) => {
-//     const { payload } = data;
-//     if (payload.event === CONNECTION_STATE_CHANGE) {
-//       const { connectionState: inFlightState } = payload.data;
-//       console.log(inFlightState);
-//       connectionState = inFlightState;
-//     }
-//   });
-//   const client = generateClient();
-//   const subscription = await client
-//     .graphql({
-//       query,
-//       variables: { storeId },
-//     })
-//     .subscribe({
-//       next: ({ data }) => resultsArray.push(data.onJobCreated),
-//       error: (err) => console.warn(err),
-//     });
-//   await retry(
-//     async () => {
-//       expect(connectionState).toBe('Connected');
-//     },
-//     { retries: 4 },
-//   );
-//   return { subscription, stopHubListener };
-// };

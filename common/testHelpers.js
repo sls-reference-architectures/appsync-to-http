@@ -60,8 +60,8 @@ export class TestHelpers {
     );
     expect(status).toEqual(200);
     expect(data.errors).toBeUndefined();
-    const { id } = data.data.createProduct;
-    const product = { ...createProductInput, productId: id };
+    const { productId } = data.data.createProduct;
+    const product = { ...createProductInput, productId };
     this.trackProductForTeardown(product);
 
     return product;

@@ -9,9 +9,6 @@ global.WebSocket = require('ws'); // MUST have this to work in NodeJS
 const { AWS_REGION, GRAPH_API_KEY, GRAPH_API_URL } = process.env;
 
 const setUpSubscription = async ({ query, resultsArray, variables }) => {
-  console.log('env', { AWS_REGION, GRAPH_API_KEY, GRAPH_API_URL });
-  console.log('variables', variables);
-  console.log('query', query);
   Amplify.configure({
     API: {
       GraphQL: {
