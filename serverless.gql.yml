@@ -108,7 +108,7 @@ functions:
             source:
               - products
             detail-type:
-              - store-admin.create
+              - create
     iamRoleStatements:
       - Effect: Allow
         Action: appsync:GraphQL

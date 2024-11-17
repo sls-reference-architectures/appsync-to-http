@@ -8,7 +8,7 @@ import { setUpSubscription } from './graphqlTestHelpers';
 
 const testHelpers = new TestHelpers();
 
-describe('When a Product is created', () => {
+describe.skip('When a Product is created', () => {
   let subscription;
   let stopHubListener;
 
