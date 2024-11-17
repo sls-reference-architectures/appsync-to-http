@@ -8,7 +8,7 @@ import { createTestId, OnProductCreatedSubscription, TestHelpers } from '../../c
 
 const testHelpers = new TestHelpers();
 
-describe.skip('When a Product is created', () => {
+describe('When a Product is created', () => {
   let subscription;
   let stopHubListener;
 
