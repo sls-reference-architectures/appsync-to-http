@@ -6,16 +6,20 @@ import ProductsRepository from '../http/src/repository';
 
 export const createTestId = () => `test_${ulid()}`;
 
-export const createRandomProduct = () => ({
-  metadata: {
-    createdBy: `user_${ulid()}`,
-    sourceId: ulid(),
-  },
-  name: `nifty-product-${ulid()}`,
-  price: 42,
-  productId: ulid(),
-  storeId: ulid(),
-});
+export const createRandomProduct = (overrideWith) => {
+  const product = {
+    metadata: {
+      createdBy: `user_${ulid()}`,
+      sourceId: ulid(),
+    },
+    name: `nifty-product-${ulid()}`,
+    price: 42,
+    productId: ulid(),
+    storeId: ulid(),
+  };
+
+  return { ...product, ...overrideWith };
+};
 
 export const createRandomCreateProductInput = () => ({
   metadata: {
