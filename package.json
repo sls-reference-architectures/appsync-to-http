@@ -54,7 +54,7 @@
     "@aws-sdk/client-dynamodb": "^3.749.0",
     "@aws-sdk/client-eventbridge": "^3.749.0",
     "@aws-sdk/lib-dynamodb": "^3.749.0",
-    "@aws-sdk/util-dynamodb": "^3.749.0",
+    "@aws-sdk/util-dynamodb": "^3.758.0",
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@middy/core": "^6.0.0",
     "@middy/http-error-handler": "^6.0.0",
