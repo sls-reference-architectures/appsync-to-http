@@ -44,10 +44,10 @@
     "prettier": "^3.5.1",
     "serverless-appsync-plugin": "^2.9.1",
     "serverless-deployment-bucket": "^1.6.0",
-    "serverless-esbuild": "^1.54.6",
+    "serverless-esbuild": "^1.55.0",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-prune-plugin": "^2.1.0",
-    "ws": "^8.18.0"
+    "ws": "^8.18.1"
   },
   "dependencies": {
     "@aws-appsync/utils": "^1.12.0",
@@ -61,8 +61,8 @@
     "@middy/http-event-normalizer": "^6.1.6",
     "@middy/http-json-body-parser": "^6.1.6",
     "@middy/input-output-logger": "^6.1.6",
-    "aws4-axios": "^3.3.14",
-    "axios": "^1.7.9",
+    "aws4-axios": "^3.4.0",
+    "axios": "^1.8.4",
     "ulid": "^2.3.0"
   },
   "lint-staged": {
