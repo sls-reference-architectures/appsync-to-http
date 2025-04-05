@@ -35,7 +35,7 @@
     "aws-amplify": "^6.13.6",
     "esbuild": "^0.25.1",
     "eslint": "^9.24.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "husky": "^9.1.7",
