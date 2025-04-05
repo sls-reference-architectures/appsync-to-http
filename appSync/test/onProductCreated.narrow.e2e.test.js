@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import retry from 'async-retry';
 
 import {

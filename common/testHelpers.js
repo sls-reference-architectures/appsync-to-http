@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { ulid } from 'ulid';
 import axios from 'axios';
 
