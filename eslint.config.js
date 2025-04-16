@@ -4,6 +4,7 @@ import js from '@eslint/js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import noOnlyTests from 'eslint-plugin-no-only-tests';
+import eslintImport from 'eslint-plugin-import';
 
 // Resolve __dirname in ESM
 const filename = fileURLToPath(import.meta.url);
@@ -45,6 +46,7 @@ export default [
     },
     plugins: {
       'no-only-tests': noOnlyTests,
+      import: eslintImport,
     },
   },
 ];
