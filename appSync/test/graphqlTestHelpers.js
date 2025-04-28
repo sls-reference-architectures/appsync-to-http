@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import retry from 'async-retry';
 import { Amplify } from 'aws-amplify';
 import { CONNECTION_STATE_CHANGE, generateClient } from 'aws-amplify/api';
