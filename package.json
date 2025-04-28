@@ -70,6 +70,6 @@
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix",
-    "*.{js,md,ts}": "prettier --write --ignore-path .gitignore"
+    "*.{js,mjs,md,ts}": "prettier --write --ignore-path .gitignore"
   }
 }
