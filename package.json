@@ -62,7 +62,7 @@
     "@middy/core": "^6.1.6",
     "@middy/http-error-handler": "^6.1.6",
     "@middy/http-event-normalizer": "^6.1.6",
-    "@middy/http-json-body-parser": "^6.1.6",
+    "@middy/http-json-body-parser": "^6.4.5",
     "@middy/input-output-logger": "^6.1.6",
     "aws4-axios": "^3.4.0",
     "axios": "^1.9.0",
