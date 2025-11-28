@@ -43,7 +43,12 @@ const setUpSubscription = async ({ query, resultsArray, variables }) => {
     },
     { retries: 4 },
   );
+  // Below is an experiment. I suspect "Connected" state is insufficient to start receiving messages. --SRO
+  await sleep(7500);
+
   return { subscription, stopHubListener };
 };
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export { setUpSubscription };
