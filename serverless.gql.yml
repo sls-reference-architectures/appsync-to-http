@@ -12,7 +12,7 @@ provider:
   logRetentionInDays: 7
   name: aws
   region: us-east-1
-  runtime: nodejs20.x
+  runtime: nodejs22.x
   stage: ${opt:stage, 'dev'}
   tags:
     lumigo:auto-trace: 'true'
@@ -116,6 +116,9 @@ functions:
         Action: appsync:GraphQL
         Resource: 
           - Fn::Join: ["", [!GetAtt GraphQlApi.Arn, "/*"]] 
+
+package:
+  individually: true
 
 resources:
   Outputs:
