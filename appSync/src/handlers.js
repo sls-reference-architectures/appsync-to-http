@@ -1,6 +1,7 @@
-import axios from 'axios';
-import aws4Interceptor from 'aws4-axios';
+// import axios from 'axios';
+// import aws4Interceptor from 'aws4-axios';
 import Logger from '@dazn/lambda-powertools-logger';
+import { getAws4fetchAppSyncClient } from '../../common/aws4fetchClient';
 
 const echo = async (event) => {
   Logger.debug('In echo()', { event });
@@ -39,22 +40,56 @@ const NotifyProductCreatedMutation = /* GraphQL */ `
   }
 `;
 
-const executeSignedQuery = async ({ query, url, variables }) => {
-  const axiosInstance = axios.create();
-  const interceptor = aws4Interceptor({
-    options: {
-      region: process.env.AWS_REGION,
-      service: 'appsync',
-    },
-  });
-  axiosInstance.interceptors.request.use(interceptor);
-  const { data, errors, headers, status } = await axiosInstance.post(
-    url,
-    { query, variables },
-    { headers: { 'Content-Type': 'application/json' } },
-  );
+// const executeSignedQuery = async ({ query, url, variables }) => {
+//   const axiosInstance = axios.create();
+//   const interceptor = aws4Interceptor({
+//     options: {
+//       region: process.env.AWS_REGION,
+//       service: 'appsync',
+//     },
+//   });
+//   axiosInstance.interceptors.request.use(interceptor);
+//   const { data, errors, headers, status } = await axiosInstance.post(
+//     url,
+//     { query, variables },
+//     { headers: { 'Content-Type': 'application/json' } },
+//   );
 
-  return { data, errors, headers, status };
+//   return { data, errors, headers, status };
+// };
+
+const executeSignedQuery = async ({ query, url, variables }) => {
+  const appSyncClient = getAws4fetchAppSyncClient();
+  const options = buildGqlFetchOptions({ query, variables });
+  const response = await appSyncClient.fetch(url, options);
+  const data = await response.json();
+
+  return {
+    data,
+    errors: data.errors,
+    headers: convertFetchHeadersToObject(response.headers),
+    status: response.status,
+  };
+};
+
+const buildGqlFetchOptions = ({ headers, query, variables }) => ({
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables,
+  }),
+});
+
+const convertFetchHeadersToObject = (fetchHeaders) => {
+  const headersObj = {};
+  for (const [key, value] of fetchHeaders.entries()) {
+    headersObj[key] = value;
+  }
+  return headersObj;
 };
 
 export { echo, onProductCreated };
