@@ -2,5 +2,10 @@
   "cSpell.words": [
     "ecommerce",
     "osls"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#08323E",
+    "titleBar.activeBackground": "#0B4657",
+    "titleBar.activeForeground": "#F4FBFE"
+  }
 }
