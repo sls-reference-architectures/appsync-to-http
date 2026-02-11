@@ -66,7 +66,7 @@
     "@middy/input-output-logger": "^6.1.6",
     "aws4-axios": "^3.4.0",
     "aws4fetch": "^1.0.20",
-    "axios": "^1.13.4",
+    "axios": "^1.13.5",
     "ulid": "^3.0.2"
   },
   "lint-staged": {
