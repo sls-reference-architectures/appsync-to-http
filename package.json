@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@aws-appsync/utils": "^2.0.3",
-    "@aws-sdk/client-dynamodb": "^3.1045.0",
+    "@aws-sdk/client-dynamodb": "^3.1058.0",
     "@aws-sdk/client-eventbridge": "^3.982.0",
     "@aws-sdk/lib-dynamodb": "^3.1043.0",
     "@aws-sdk/util-dynamodb": "^3.982.0",
