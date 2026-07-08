@@ -6,7 +6,7 @@ provider:
   name: aws
   logRetentionInDays: 7
   region: us-east-1
-  runtime: nodejs22.x
+  runtime: nodejs24.x
   stage: ${opt:stage, 'dev'}
   deploymentBucket:
     name: com.reference-architecture.deploys
