@@ -20,9 +20,6 @@ provider:
 custom:
   esbuild:
     minify: true
-  prune:
-    automatic: true
-    number: 1
 
 appSync:
   name: appsync-to-http
@@ -94,7 +91,6 @@ plugins:
 - serverless-appsync-plugin
 - serverless-esbuild
 - serverless-iam-roles-per-function
-- serverless-prune-plugin
 
 functions:
   echo:

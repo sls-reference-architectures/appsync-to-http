@@ -22,15 +22,11 @@ custom:
     minify: true
   eventBusARN: arn:aws:events:${self:provider.region}:${AWS::AccountId}:event-bus/${self:custom.eventBusName}
   eventBusName: ${self:service}-products
-  prune:
-    automatic: true
-    number: 1
   tableName: ${self:service}-products
 
 plugins:
 - serverless-esbuild
 - serverless-iam-roles-per-function
-- serverless-prune-plugin
 
 functions:
 ## HTTP
