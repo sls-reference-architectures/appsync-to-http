@@ -46,7 +46,6 @@
     "osls": "^4.0.0",
     "prettier": "^3.8.1",
     "serverless-appsync-plugin": "^2.10.5",
-    "serverless-deployment-bucket": "^1.6.0",
     "serverless-esbuild": "^1.57.1",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-prune-plugin": "^2.1.0",
