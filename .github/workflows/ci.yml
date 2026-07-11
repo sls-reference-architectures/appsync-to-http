@@ -41,3 +41,7 @@ jobs:
         run: npm run deploy:gql
       - name: Run E2E Tests
         run: npm run test:e2e
+      - name: Tear down GQL
+        run: npm run teardown:gql
+      - name: Tear down HTTP
+        run: npm run teardown:http
