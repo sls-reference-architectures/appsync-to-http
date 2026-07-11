@@ -21,7 +21,7 @@
     "url": "git+https://github.com/sls-reference-architectures/appsync-to-http.git"
   },
   "author": "Seth Orell",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sls-reference-architectures/appsync-to-http/issues"
   },
