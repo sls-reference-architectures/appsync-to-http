@@ -3,6 +3,7 @@ service: appsyncToHttp-http
 configValidationMode: error
 
 provider:
+  architecture: arm64
   name: aws
   logRetentionInDays: 7
   region: us-east-1

@@ -3,6 +3,7 @@ service: appsyncToHttp-gql
 configValidationMode: error
 
 provider:
+  architecture: arm64
   deploymentBucket:
     name: com.reference-architecture.deploys
     maxPreviousDeploymentArtifacts: 5
