@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/sls-reference-architectures/appsync-to-http#readme",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.1081.0",
+    "@aws-sdk/client-cloudformation": "^3.1090.0",
     "@eslint/js": "^10.0.1",
     "@swc/core": "^1.15.33",
     "@swc/jest": "^0.2.39",
