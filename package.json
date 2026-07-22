@@ -42,7 +42,7 @@
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "jest-extended": "^7.0.0",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^17.1.1",
     "osls": "^4.0.0",
     "prettier": "^3.8.1",
     "serverless-appsync-plugin": "^2.13.0",
