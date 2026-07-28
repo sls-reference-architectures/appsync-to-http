@@ -1,4 +1,4 @@
-import Logger from '@dazn/lambda-powertools-logger';
+import { Logger } from '@aws-lambda-powertools/logger';
 import middy from '@middy/core';
 import eventNormalizer from '@middy/http-event-normalizer';
 import errorHandler from '@middy/http-error-handler';
@@ -8,10 +8,11 @@ import inputOutputLogger from '@middy/input-output-logger';
 import * as service from './service';
 import Publisher from './publisher';
 
+const logger = new Logger({ serviceName: 'appsyncToHttp-http' });
 const publisher = new Publisher(process.env.EVENT_BUS_NAME);
 
 const getProduct = async (event) => {
-  Logger.debug('In handler.getProduct()', { event });
+  logger.debug('In handler.getProduct()', { event });
   const {
     pathParameters: { productId },
     headers: { 'x-custom-store-id': storeId },
@@ -22,7 +23,7 @@ const getProduct = async (event) => {
 };
 
 const getProducts = async (event) => {
-  Logger.debug('In getProducts()', { event });
+  logger.debug('In getProducts()', { event });
   const {
     headers: { 'x-custom-store-id': storeId },
     queryStringParameters: { limit, cursor },
@@ -37,7 +38,7 @@ const getProducts = async (event) => {
 };
 
 const createProduct = async (event) => {
-  Logger.debug('In createProduct()', { event });
+  logger.debug('In createProduct()', { event });
   const {
     headers: { 'x-custom-store-id': storeId },
     body,

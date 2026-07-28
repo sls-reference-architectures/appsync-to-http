@@ -1,12 +1,13 @@
-import Logger from '@dazn/lambda-powertools-logger';
+import { Logger } from '@aws-lambda-powertools/logger';
 import { ulid } from 'ulid';
 
 import ProductsRepository from './repository';
 
+const logger = new Logger({ serviceName: 'appsyncToHttp-http' });
 const repo = new ProductsRepository();
 
 const getProduct = async (input) => {
-  Logger.debug('In service.getProduct()', { input });
+  logger.debug('In service.getProduct()', { input });
   const product = await repo.getProduct(input);
 
   return product;
@@ -20,7 +21,7 @@ const createProduct = async (input) => {
 };
 
 const getProducts = async (input) => {
-  Logger.debug('In service.getProducts()', { input });
+  logger.debug('In service.getProducts()', { input });
 
   return repo.getProducts(input);
 };

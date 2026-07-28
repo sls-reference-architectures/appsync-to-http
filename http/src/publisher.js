@@ -1,9 +1,11 @@
 import { unmarshall } from '@aws-sdk/util-dynamodb';
 import { PutEventsCommand } from '@aws-sdk/client-eventbridge';
-import Logger from '@dazn/lambda-powertools-logger';
+import { Logger } from '@aws-lambda-powertools/logger';
 import { ulid } from 'ulid';
 
 import getEventBridgeClient from './eventBridgeClient';
+
+const logger = new Logger({ serviceName: 'appsyncToHttp-http' });
 
 class Publisher {
   constructor(busName) {
@@ -32,14 +34,14 @@ class Publisher {
       });
       const allEntries = [...insertEntries, ...modifyEntries, ...removeEntries];
       if (allEntries.length === 0) {
-        Logger.info('No events to publish');
+        logger.info('No events to publish');
         return;
       }
       const eventBridgeClient = getEventBridgeClient();
       const putEventsCommand = new PutEventsCommand({ Entries: allEntries });
       await eventBridgeClient.send(putEventsCommand);
     } catch (error) {
-      Logger.error('Failed to publish events', { error });
+      logger.error('Failed to publish events', { error });
       throw error;
     }
   }
