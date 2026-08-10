@@ -48,7 +48,7 @@
     "serverless-appsync-plugin": "^2.13.0",
     "serverless-esbuild": "^1.57.1",
     "serverless-iam-roles-per-function": "^3.2.0",
-    "ws": "^8.21.0"
+    "ws": "^8.21.2"
   },
   "dependencies": {
     "@aws-appsync/utils": "^2.0.3",
