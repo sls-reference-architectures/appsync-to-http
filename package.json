@@ -35,7 +35,6 @@
     "aws-amplify": "^6.16.3",
     "esbuild": "^0.28.1",
     "eslint": "^10.8.0",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jest": "^29.16.0",
     "eslint-plugin-no-only-tests": "^3.4.0",
     "globals": "^17.7.0",
