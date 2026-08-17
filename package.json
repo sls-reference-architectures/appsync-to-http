@@ -43,7 +43,7 @@
     "jest-extended": "^7.0.0",
     "lint-staged": "^17.3.0",
     "osls": "^4.1.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.9.6",
     "serverless-appsync-plugin": "^2.13.0",
     "serverless-esbuild": "^1.57.1",
     "serverless-iam-roles-per-function": "^3.2.0",
