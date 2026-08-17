@@ -55,7 +55,7 @@
     "@aws-sdk/client-dynamodb": "^3.1105.0",
     "@aws-sdk/client-eventbridge": "^3.1090.0",
     "@aws-sdk/lib-dynamodb": "^3.1101.0",
-    "@aws-sdk/util-dynamodb": "^3.996.6",
+    "@aws-sdk/util-dynamodb": "^3.996.8",
     "@middy/core": "^7.7.2",
     "@middy/http-error-handler": "^7.7.2",
     "@middy/http-event-normalizer": "^7.7.2",
