@@ -69,5 +69,8 @@
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix",
     "*.{js,mjs,md,ts}": "prettier --write --ignore-path .gitignore"
+  },
+  "overrides": {
+    "fast-json-patch": "^3.1.1"
   }
 }
