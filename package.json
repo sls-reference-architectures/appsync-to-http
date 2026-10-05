@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/sls-reference-architectures/appsync-to-http#readme",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.1141.0",
+    "@aws-sdk/client-cloudformation": "^3.1144.0",
     "@eslint/js": "^10.0.1",
     "@swc/core": "^1.16.2",
     "@swc/jest": "^0.2.39",
@@ -52,9 +52,9 @@
   "dependencies": {
     "@aws-appsync/utils": "^2.0.3",
     "@aws-lambda-powertools/logger": "^2.34.0",
-    "@aws-sdk/client-dynamodb": "^3.1141.0",
-    "@aws-sdk/client-eventbridge": "^3.1141.0",
-    "@aws-sdk/lib-dynamodb": "^3.1141.0",
+    "@aws-sdk/client-dynamodb": "^3.1144.0",
+    "@aws-sdk/client-eventbridge": "^3.1144.0",
+    "@aws-sdk/lib-dynamodb": "^3.1144.0",
     "@aws-sdk/util-dynamodb": "^3.996.9",
     "@middy/core": "^7.9.2",
     "@middy/http-error-handler": "^7.9.2",
