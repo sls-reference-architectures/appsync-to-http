@@ -46,7 +46,7 @@
     "serverless-appsync-plugin": "^2.13.0",
     "serverless-esbuild": "^1.57.1",
     "serverless-iam-roles-per-function": "^3.2.0",
-    "ws": "^8.21.3",
+    "ws": "^8.22.0",
     "serverless": "npm:osls@^4.2.0"
   },
   "dependencies": {
